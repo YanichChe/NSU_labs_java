@@ -24,9 +24,13 @@ public class Main
             csvConverter.write();
         }
 
+        catch (ArrayIndexOutOfBoundsException e)
+        {
+            System.out.println("Not input files");
+        }
+
         catch (IOException e)
         {
-            System.out.println("Your file is not found");
             e.printStackTrace();
         }
     }
