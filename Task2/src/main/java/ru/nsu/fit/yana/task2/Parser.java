@@ -1,4 +1,4 @@
-package main.java.ru.nsu.fit.yana.task2;
+package ru.nsu.fit.yana.task2;
 
 import org.apache.commons.cli.*;
 

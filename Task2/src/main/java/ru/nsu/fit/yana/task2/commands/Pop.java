@@ -1,8 +1,8 @@
-package main.java.ru.nsu.fit.yana.task2.commands;
+package ru.nsu.fit.yana.task2.commands;
 
-import main.java.ru.nsu.fit.yana.task2.Command;
-import main.java.ru.nsu.fit.yana.task2.Context;
-import main.java.ru.nsu.fit.yana.task2.exceptions.StackSizeException;
+import ru.nsu.fit.yana.task2.Command;
+import ru.nsu.fit.yana.task2.Context;
+import ru.nsu.fit.yana.task2.exceptions.StackSizeException;
 
 import java.util.Deque;
 

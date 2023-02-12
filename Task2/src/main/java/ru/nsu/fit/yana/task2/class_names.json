@@ -1,11 +1,11 @@
 {
-  "DEFINE": "main.java.ru.nsu.fit.yana.task2.commands.Define",
-  "/": "main.java.ru.nsu.fit.yana.task2.commands.Division",
-  "*": "main.java.ru.nsu.fit.yana.task2.commands.Multiplication",
-  "POP": "main.java.ru.nsu.fit.yana.task2.commands.Pop",
-  "PRINT": "main.java.ru.nsu.fit.yana.task2.commands.Print",
-  "PUSH": "main.java.ru.nsu.fit.yana.task2.commands.Push",
-  "SQRT": "main.java.ru.nsu.fit.yana.task2.commands.Sqrt",
-  "-": "main.java.ru.nsu.fit.yana.task2.commands.Subtraction",
-  "+": "main.java.ru.nsu.fit.yana.task2.commands.Sum"
+  "DEFINE": "ru.nsu.fit.yana.task2.commands.Define",
+  "/": "ru.nsu.fit.yana.task2.commands.Division",
+  "*": "ru.nsu.fit.yana.task2.commands.Multiplication",
+  "POP": "ru.nsu.fit.yana.task2.commands.Pop",
+  "PRINT": "ru.nsu.fit.yana.task2.commands.Print",
+  "PUSH": "ru.nsu.fit.yana.task2.commands.Push",
+  "SQRT": "ru.nsu.fit.yana.task2.commands.Sqrt",
+  "-": "ru.nsu.fit.yana.task2.commands.Subtraction",
+  "+": "ru.nsu.fit.yana.task2.commands.Sum"
 }

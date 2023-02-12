@@ -1,9 +1,12 @@
-package main.java.ru.nsu.fit.yana.task2;
+package test.main.java.ru.nsu.fit.yana.task2;
 
-import main.java.ru.nsu.fit.yana.task2.commands.*;
 import org.junit.jupiter.api.Test;
+import ru.nsu.fit.yana.task2.Command;
+import ru.nsu.fit.yana.task2.CommandFactory;
+import ru.nsu.fit.yana.task2.commands.*;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class CommandFactoryTest
 {
