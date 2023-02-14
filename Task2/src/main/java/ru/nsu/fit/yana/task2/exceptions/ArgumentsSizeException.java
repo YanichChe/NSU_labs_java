@@ -1,6 +1,6 @@
 package ru.nsu.fit.yana.task2.exceptions;
 
-public class ArgumentsSizeException extends Exception
+public class ArgumentsSizeException extends ArrayIndexOutOfBoundsException
 {
     public ArgumentsSizeException()
     {
