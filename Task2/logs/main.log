@@ -1,0 +1,21 @@
+0 [main] INFO  ru.nsu.fit.yana.task2.Main  - Initialize Calc application
+0 [main] INFO  ru.nsu.fit.yana.task2.Main  - Parsing command line
+0 [main] INFO  ru.nsu.fit.yana.task2.Main  - Create context
+0 [main] INFO  ru.nsu.fit.yana.task2.Main  - load Calc
+8127 [main] INFO  ru.nsu.fit.yana.task2.Main  - try to create command meow
+8127 [main] ERROR ru.nsu.fit.yana.task2.Main  - 
+ru.nsu.fit.yana.task2.exceptions.ClassCreationException: not such command
+	at ru.nsu.fit.yana.task2.CommandFactory.createCommand(CommandFactory.java:32)
+	at ru.nsu.fit.yana.task2.Main.main(Main.java:35)
+12486 [main] INFO  ru.nsu.fit.yana.task2.Main  - try to create command DEFINE
+12486 [main] INFO  ru.nsu.fit.yana.task2.Main  - the command was created successfully
+12486 [main] ERROR ru.nsu.fit.yana.task2.Main  - 
+ru.nsu.fit.yana.task2.exceptions.ArgumentFormatException: wrong argument format
+	at ru.nsu.fit.yana.task2.commands.Define.load(Define.java:24)
+	at ru.nsu.fit.yana.task2.Main.main(Main.java:38)
+19470 [main] INFO  ru.nsu.fit.yana.task2.Main  - try to create command DEFINE
+19470 [main] INFO  ru.nsu.fit.yana.task2.Main  - the command was created successfully
+21798 [main] INFO  ru.nsu.fit.yana.task2.Main  - try to create command PUSH
+21798 [main] INFO  ru.nsu.fit.yana.task2.Main  - the command was created successfully
+23594 [main] INFO  ru.nsu.fit.yana.task2.Main  - try to create command PRINT
+23594 [main] INFO  ru.nsu.fit.yana.task2.Main  - the command was created successfully

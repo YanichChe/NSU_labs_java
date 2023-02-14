@@ -40,7 +40,7 @@ class ParserTest
     private static Stream<Arguments> generateTestIncorrectArgs()
     {
         return Stream.of(
-                Arguments.of(new String[]{"--file_name", "C:\\Users\\Yana228\\IdeaProjects\\NSU_labs_java\\Task2\\src\\main\\java\\test\\ru\\nsu\\fit\\yana\\task2\\example.txt"}, FileNotFoundException.class)
+                Arguments.of(new String[]{"--file_name", "./src/main/java/test/ru/nsu/fit/yana/task2/example.txt"}, FileNotFoundException.class)
         );
     }
 
@@ -48,9 +48,9 @@ class ParserTest
     {
         return Stream.of(
                 Arguments.of((Object) new String[]{""}),
-                Arguments.of((Object) new String[]{"-f", "C:\\Users\\Yana228\\IdeaProjects\\NSU_labs_java\\Task2\\src\\main\\java\\test\\ru\\nsu\\fit\\yana\\task2\\example.txt"}),
+                Arguments.of((Object) new String[]{"-f", "./src/main/java/test/ru/nsu/fit/yana/task2/example.txt"}),
                 Arguments.of((Object) new String[]{"-h"}),
-                Arguments.of((Object) new String[]{"--file_name", "C:\\Users\\Yana228\\IdeaProjects\\NSU_labs_java\\Task2\\src\\main\\java\\test\\ru\\nsu\\fit\\yana\\task2\\example.txt"})
+                Arguments.of((Object) new String[]{"--file_name", "./src/main/java/test/ru/nsu/fit/yana/task2/example.txt"})
         );
     }
 }
