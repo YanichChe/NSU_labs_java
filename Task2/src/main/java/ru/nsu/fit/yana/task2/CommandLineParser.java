@@ -6,12 +6,12 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
-public class Parser
+public class CommandLineParser
 {
     private InputStream in = System.in;
     private final String[] args;
 
-    public Parser(String[] args)
+    public CommandLineParser(String[] args)
     {
         this.args = args;
     }
@@ -33,7 +33,7 @@ public class Parser
                 .build());
 
         HelpFormatter helpFormatter = new HelpFormatter();
-        CommandLineParser commandLineParser = new DefaultParser();
+        org.apache.commons.cli.CommandLineParser commandLineParser = new DefaultParser();
         try
         {
             CommandLine commandLine = commandLineParser.parse(options, args);
