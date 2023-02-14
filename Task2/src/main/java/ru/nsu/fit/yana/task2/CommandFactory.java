@@ -1,40 +1,35 @@
 package ru.nsu.fit.yana.task2;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+import ru.nsu.fit.yana.task2.exceptions.ClassCreationException;
 
-import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Properties;
 
 public class CommandFactory
 {
-    //TODO изменить на относительный путь
-    public static final String fileName = "C:\\Users\\Yana228\\IdeaProjects\\NSU_labs_java\\Task2\\src\\main\\java\\ru\\nsu\\fit\\yana\\task2\\class_names.json";
-
-    public static Command createCommand(String name)
+    public static Command createCommand(String name) throws ClassCreationException
     {
-        JSONParser jsonParser = new JSONParser();
+        Properties properties = new Properties();
         Command command = null;
 
-        try (FileReader reader = new FileReader(fileName))
+        try
         {
-            Object obj = jsonParser.parse(reader);
-            JSONObject jo = (JSONObject) obj;
-            String className = (String) jo.get(name);
+            properties.load(CommandFactory.class
+                      .getClassLoader()
+                      .getResourceAsStream("class_names.properties"));
 
-            Class c = Class.forName(className);
+            Class c = Class.forName(properties.getProperty(name));
             Constructor constructor = c.getConstructor();
             command = (Command) constructor.newInstance();
         }
 
-        catch (IllegalAccessException | ParseException | IOException |
+        catch (NullPointerException | IllegalAccessException | IOException |
                 ClassNotFoundException | InvocationTargetException |
                 NoSuchMethodException | InstantiationException e)
         {
-            e.printStackTrace();
+            throw new ClassCreationException();
         }
 
         return command;

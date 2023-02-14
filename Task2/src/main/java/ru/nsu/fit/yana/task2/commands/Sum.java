@@ -12,10 +12,11 @@ public class Sum extends Command
     public void load(String[] args, Context ctx) throws EmptyStackException
     {
         Deque<Double> stack = ctx.getStack();
-        Double var1 = stack.pop();
-        Double var2 = stack.pop();
 
         if (stack.size() < 2) throw new EmptyStackException();
+
+        Double var1 = stack.pop();
+        Double var2 = stack.pop();
 
         stack.push(var1 + var2);
     }

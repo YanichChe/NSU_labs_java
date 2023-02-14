@@ -15,7 +15,7 @@ public class Sqrt extends Command
         Deque<Double> stack = ctx.getStack();
 
         if (stack.size() == 0) throw new EmptyStackException();
-        Double var = stack.pop();
+        Double var = stack.peek();
 
         if (var < 0) throw new NegativeNumberException();
 
