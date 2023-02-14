@@ -1,12 +1,14 @@
 package ru.nsu.fit.yana.task2;
 
 
+import ru.nsu.fit.yana.task2.exceptions.UndefinedFileNameException;
+
 import java.io.InputStream;
 import java.util.Scanner;
 
 public class Main
 {
-    public static void main(String[] args)
+    public static void main(String[] args) throws UndefinedFileNameException
     {
         CommandLineParser parser = new CommandLineParser(args);
         parser.parse();

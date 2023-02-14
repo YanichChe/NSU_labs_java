@@ -1,6 +1,7 @@
 package ru.nsu.fit.yana.task2;
 
 import org.apache.commons.cli.*;
+import ru.nsu.fit.yana.task2.exceptions.UndefinedFileNameException;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -16,7 +17,7 @@ public class CommandLineParser
         this.args = args;
     }
 
-    public void parse()
+    public void parse() throws UndefinedFileNameException
     {
 
         Options options = new Options();
@@ -37,7 +38,7 @@ public class CommandLineParser
         try
         {
             CommandLine commandLine = commandLineParser.parse(options, args);
-            if (((CommandLine) commandLine).hasOption("help"))
+            if (commandLine.hasOption("help"))
             {
                 helpFormatter.printHelp("cmd", options);
             }
@@ -52,7 +53,8 @@ public class CommandLineParser
         catch (ParseException | FileNotFoundException e)
         {
             helpFormatter.printHelp("cmd", options);
-            e.printStackTrace();
+            System.err.println(e.getMessage());
+            throw new UndefinedFileNameException();
         }
     }
 
