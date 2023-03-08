@@ -9,7 +9,7 @@ import java.util.TimerTask;
 
 public class Tetris extends JFrame {
     public static final int DELAY = 100;
-    public static final int PERIOD = 800;
+    public static final int PERIOD = 700;
 
     private final Board board;
     private final BoardController boardController;
@@ -23,6 +23,9 @@ public class Tetris extends JFrame {
         statusBar = new StatusBar();
         boardController = new BoardController(board, boardDrawer, statusBar);
         timer = new Timer();
+
+        init();
+        start();
     }
 
     public void init() {
