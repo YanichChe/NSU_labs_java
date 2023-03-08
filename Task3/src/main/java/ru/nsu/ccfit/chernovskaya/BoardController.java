@@ -8,12 +8,12 @@ import static main.java.ru.nsu.ccfit.chernovskaya.Figure.FIGURE_SIZE;
 
 /**
  * Class which manages board and boardDrawer
- * <p>Private fields: Board board, BoardDrawer boardDrawer<p/>
+ * <p>Private fields: Board board, BoardDrawer boardDrawer, StatusBar statusBar<p/>
  * @since java 16
  */
-public record BoardController(Board board, BoardDrawer boardDrawer) {
+public record BoardController(Board board, BoardDrawer boardDrawer, StatusBar statusBar) {
 
-    protected enum ROTATION {
+    protected enum Rotation {
         LEFT, RIGHT
     }
     /**
@@ -21,14 +21,16 @@ public record BoardController(Board board, BoardDrawer boardDrawer) {
      * If figure can't move down, method set started status as false
      */
     public void createNewFigure() {
-        board.setCurrentFigure(Figure.getRandomFigure());
+        Figure newFigure = Figure.getRandomFigure();
+        if (!ableMove(newFigure, new Point(BOARD_WIDTH / 2, BOARD_HEIGHT - 1 + newFigure.getMinY()))) {
+            board.setStartedStatus(false);
+            return;
+        }
+
+        board.setCurrentFigure(newFigure);
         board.setCurX(BOARD_WIDTH / 2);
         board.setCurY(BOARD_HEIGHT - 1 + board.getCurrentFigure().getMinY());
         board.setFellStatus(false);
-
-        if (!ableMove(board.getCurrentFigure(), new Point(board.getCurX(), board.getCurY()))) {
-            board.setStartedStatus(false);
-        }
     }
 
     /**
@@ -83,7 +85,7 @@ public record BoardController(Board board, BoardDrawer boardDrawer) {
      * so that it completely fits on the board
      * @param rotation direction of rotation
      */
-    public void rotate(ROTATION rotation) {
+    public void rotate(Rotation rotation) {
         if (board.getCurrentFigure().getFigureName().equals(Figure.Tetrominoe.SquareShape)) {
             return;
         }
@@ -91,12 +93,12 @@ public record BoardController(Board board, BoardDrawer boardDrawer) {
         Figure result = new Figure(board.getCurrentFigure().getFigureName());
         for (int i = 0; i < FIGURE_SIZE; i++) {
 
-            if (rotation == ROTATION.LEFT) {
+            if (rotation == Rotation.LEFT) {
                 result.getCoordinate(i).setLocation(board.getCurrentFigure().getCoordinate(i).getY(),
                         -board.getCurrentFigure().getCoordinate(i).getX());
             }
 
-            if (rotation == ROTATION.RIGHT){
+            if (rotation == Rotation.RIGHT){
                 result.getCoordinate(i).setLocation(-board.getCurrentFigure().getCoordinate(i).getY(),
                         board.getCurrentFigure().getCoordinate(i).getX());
             }
@@ -113,6 +115,14 @@ public record BoardController(Board board, BoardDrawer boardDrawer) {
             }
         }
 
+        for (int i = 0; i < FIGURE_SIZE; i++) {
+            int x = board.getCurX() + result.getCoordinate(i).x;
+            int y = board.getCurY() - result.getCoordinate(i).y;
+
+            if (board.getFigure(new Point(x, y)) != Figure.Tetrominoe.Empty) return;
+        }
+
+        if(!ableMove(result, new Point(board.getCurX(), board.getCurY() - 1))) return;
         board.setCurrentFigure(result);
         boardDrawer.repaint();
     }
@@ -144,6 +154,7 @@ public record BoardController(Board board, BoardDrawer boardDrawer) {
 
         if (numFullLines > 0) {
             board.addNumberLinesRemoved(numFullLines);
+            statusBar.setStatusBarText("Score :" + board.getNumberLinesRemoved() * BOARD_WIDTH);
             boardDrawer.repaint();
         }
     }
