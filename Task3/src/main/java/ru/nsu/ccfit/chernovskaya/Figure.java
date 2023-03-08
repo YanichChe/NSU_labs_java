@@ -53,41 +53,8 @@ public class Figure {
     }
 
     /**
-     *
-     * @return rotated copy of this figure
-     */
-    public Figure rotateLeft() {
-        if (figureName.equals(Tetrominoe.SquareShape)) {
-            return this;
-        }
-
-        Figure result = new Figure(figureName);
-        for (int i = 0; i < FIGURE_SIZE; i++) {
-            result.coordinates[i].setLocation(coordinates[i].getY(), -coordinates[i].getX());
-        }
-
-        return result;
-    }
-
-    /**
-     * @return
-     */
-    public Figure rotateRight() {
-        if (figureName.equals(Tetrominoe.SquareShape)) {
-            return this;
-        }
-
-        Figure result = new Figure(figureName);
-        for (int i = 0; i < FIGURE_SIZE; i++) {
-            result.coordinates[i].setLocation(-coordinates[i].getY(), coordinates[i].getX());
-        }
-
-        return result;
-    }
-
-    /**
-     *
-     * @return
+     * In the loop, it passes through all the points and calculates the minimum value of y from them
+     * @return min y value
      */
     int getMinY() {
         int minY = (int) coordinates[0].getY();
