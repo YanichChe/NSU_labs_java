@@ -4,6 +4,7 @@ import java.awt.*;
 
 import static main.java.ru.nsu.ccfit.chernovskaya.Board.BOARD_HEIGHT;
 import static main.java.ru.nsu.ccfit.chernovskaya.Board.BOARD_WIDTH;
+import static main.java.ru.nsu.ccfit.chernovskaya.Figure.FIGURE_SIZE;
 
 /**
  * Class which manages board and boardDrawer
@@ -12,13 +13,16 @@ import static main.java.ru.nsu.ccfit.chernovskaya.Board.BOARD_WIDTH;
  */
 public record BoardController(Board board, BoardDrawer boardDrawer) {
 
+    protected enum ROTATION {
+        LEFT, RIGHT
+    }
     /**
      * Create new instance of class Figure, set coordinates in a center top of the board.
      * If figure can't move down, method set started status as false
      */
     public void createNewFigure() {
         board.setCurrentFigure(Figure.getRandomFigure());
-        board.setCurX(BOARD_WIDTH / 2 + 1);
+        board.setCurX(BOARD_WIDTH / 2);
         board.setCurY(BOARD_HEIGHT - 1 + board.getCurrentFigure().getMinY());
         board.setFellStatus(false);
 
@@ -44,7 +48,7 @@ public record BoardController(Board board, BoardDrawer boardDrawer) {
      * @return ability move to point
      */
     public boolean ableMove(Figure figure, Point point) {
-        for (int i = 0; i < Figure.FIGURE_SIZE; ++i) {
+        for (int i = 0; i < FIGURE_SIZE; ++i) {
             int x = point.x + figure.getCoordinate(i).x;
             int y = point.y - figure.getCoordinate(i).y;
 
@@ -70,6 +74,46 @@ public record BoardController(Board board, BoardDrawer boardDrawer) {
         board.setCurX(point.x);
         board.setCurY(point.y);
         board.setCurrentFigure(figure);
+        boardDrawer.repaint();
+    }
+
+    /**
+     * The function rotates the shape in the specified direction. If, when the figure is rotated, the index
+     * of any square of the figure goes beyond the index of the board, then the function moves the figure
+     * so that it completely fits on the board
+     * @param rotation direction of rotation
+     */
+    public void rotate(ROTATION rotation) {
+        if (board.getCurrentFigure().getFigureName().equals(Figure.Tetrominoe.SquareShape)) {
+            return;
+        }
+
+        Figure result = new Figure(board.getCurrentFigure().getFigureName());
+        for (int i = 0; i < FIGURE_SIZE; i++) {
+
+            if (rotation == ROTATION.LEFT) {
+                result.getCoordinate(i).setLocation(board.getCurrentFigure().getCoordinate(i).getY(),
+                        -board.getCurrentFigure().getCoordinate(i).getX());
+            }
+
+            if (rotation == ROTATION.RIGHT){
+                result.getCoordinate(i).setLocation(-board.getCurrentFigure().getCoordinate(i).getY(),
+                        board.getCurrentFigure().getCoordinate(i).getX());
+            }
+
+        }
+
+        for (int i = 0; i < FIGURE_SIZE; i++) {
+            int x = board.getCurX() + result.getCoordinate(i).x;
+            if (x < 0){
+                move(result, new Point(board.getCurX() + 1, board.getCurY()));
+            }
+            if (x >= BOARD_WIDTH){
+                move(result, new Point(board.getCurX() - 1, board.getCurY()));
+            }
+        }
+
+        board.setCurrentFigure(result);
         boardDrawer.repaint();
     }
 
@@ -140,7 +184,7 @@ public record BoardController(Board board, BoardDrawer boardDrawer) {
      * Causes the creation of the following shape<p/>
      */
     public void pieceDropped() {
-        for (int i = 0; i < Figure.FIGURE_SIZE; ++i) {
+        for (int i = 0; i < FIGURE_SIZE; ++i) {
             int x = board.getCurX() + board.getCurrentFigure().getCoordinate(i).x;
             int y = board.getCurY() - board.getCurrentFigure().getCoordinate(i).y;
             board.getBoardField()[(y * BOARD_WIDTH) + x] = board.getCurrentFigure().getFigureName();
@@ -149,6 +193,5 @@ public record BoardController(Board board, BoardDrawer boardDrawer) {
         removeFullLines();
         board.setFellStatus(true);
         createNewFigure();
-
     }
 }
