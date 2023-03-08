@@ -48,7 +48,10 @@ public class Board {
     }
 
     public Figure.Tetrominoe getFigure(Point point) {
-        return boardField[(point.y * BOARD_WIDTH) + point.x];
+        if (point.y * BOARD_WIDTH + point.x < BOARD_WIDTH * BOARD_HEIGHT - 1){
+            return boardField[(point.y * BOARD_WIDTH) + point.x];
+        }
+        return Figure.Tetrominoe.Empty;
     }
 
     public void setCurrentFigure(Figure currentFigure) {
