@@ -23,6 +23,8 @@ public class BoardDrawer extends JPanel {
      */
     public BoardDrawer(Board board) {
         this.board = board;
+        setBackground(new Color(0xFFFFFF));
+        setBorder(BorderFactory.createLineBorder(Color.GRAY, 4));
     }
 
     @Override
@@ -46,15 +48,13 @@ public class BoardDrawer extends JPanel {
         Color color = colors[tetrominoe.ordinal()];
 
         g.setColor(color);
-        g.fillRect(x + 1, y + 1, getSquareWidth() - 2, getSquareHeight() - 2);
+        g.fillRect(x, y, getSquareWidth(), getSquareHeight());
 
-        g.setColor(color.brighter());
-        g.drawLine(x, y + getSquareHeight() - 1, x, y);
-        g.drawLine(x, y, x + getSquareWidth() - 1, y);
-
-        g.setColor(color.darker());
-        g.drawLine(x + 1, y + getSquareHeight() - 1, x + getSquareWidth() - 1, y + getSquareHeight() - 1);
-        g.drawLine(x + getSquareWidth() - 1, y + getSquareHeight() - 1, x + getSquareWidth() - 1, y + 1);
+        g.setColor(Color.BLACK);
+        g.drawLine(x, y + getSquareHeight(), x, y);
+        g.drawLine(x, y, x + getSquareWidth(), y);
+        g.drawLine(x, y + getSquareHeight(), x + getSquareWidth(), y + getSquareHeight());
+        g.drawLine(x + getSquareWidth(), y + getSquareHeight(), x + getSquareWidth(), y);
     }
 
     /**
@@ -79,7 +79,8 @@ public class BoardDrawer extends JPanel {
             for (int i = 0; i < Figure.FIGURE_SIZE; i++) {
                 int x = board.getCurX() + board.getCurrentFigure().getCoordinate(i).x;
                 int y = board.getCurY() - board.getCurrentFigure().getCoordinate(i).y;
-                drawSquare(g, x * getSquareWidth(), boardTop + (Board.BOARD_HEIGHT - y - 1) * getSquareHeight(), board.getCurrentFigure().getFigureName());
+                drawSquare(g, x * getSquareWidth(), boardTop + (Board.BOARD_HEIGHT - y - 1) * getSquareHeight(),
+                        board.getCurrentFigure().getFigureName());
             }
         }
     }
