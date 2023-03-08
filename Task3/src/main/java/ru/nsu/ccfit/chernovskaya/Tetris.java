@@ -14,23 +14,24 @@ public class Tetris extends JFrame {
     private final Board board;
     private final BoardController boardController;
     private final BoardDrawer boardDrawer;
+    private final StatusBar statusBar;
     private final Timer timer;
 
     public Tetris() {
         board = new Board();
         boardDrawer = new BoardDrawer(board);
-        boardController = new BoardController(board, boardDrawer);
+        statusBar = new StatusBar();
+        boardController = new BoardController(board, boardDrawer, statusBar);
         timer = new Timer();
     }
 
     public void init() {
         boardDrawer.setFocusable(true);
         boardDrawer.addKeyListener(new TetrisKeyAdapter());
-        boardDrawer.setFocusable(true);
-        boardDrawer.setBackground(new Color(0xFFFFFF));
-        boardDrawer.setBorder(BorderFactory.createLineBorder(Color.GREEN, 4));
 
+        add(statusBar, BorderLayout.NORTH);
         add(boardDrawer);
+
         setTitle("Tetris");
         setSize(400, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -84,8 +85,8 @@ public class Tetris extends JFrame {
                     if(boardController.ableMove(board.getCurrentFigure(), new Point(board.getCurX() + 1, board.getCurY())))
                         boardController.move(board.getCurrentFigure(), new Point(board.getCurX() + 1, board.getCurY()));
                 }
-                case KeyEvent.VK_DOWN -> boardController.rotate(BoardController.ROTATION.LEFT);
-                case KeyEvent.VK_UP -> boardController.rotate(BoardController.ROTATION.RIGHT);
+                case KeyEvent.VK_DOWN -> boardController.rotate(BoardController.Rotation.LEFT);
+                case KeyEvent.VK_UP -> boardController.rotate(BoardController.Rotation.RIGHT);
                 case KeyEvent.VK_SPACE -> boardController.dropDown();
                 case KeyEvent.VK_D -> boardController.down();
             }
