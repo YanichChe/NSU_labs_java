@@ -10,10 +10,10 @@ import java.awt.*;
  */
 public class BoardDrawer extends JPanel {
     public final static Color[] colors = {
-            new Color(0, 0, 0), new Color(204, 102, 102),
-            new Color(218, 170, 0), new Color(102, 204, 102),
-            new Color(102, 102, 204), new Color(204, 204, 102),
-            new Color(204, 102, 204), new Color(102, 204, 204)};
+            new Color(0, 0, 0), new Color(253, 200, 18),
+            new Color(255, 126, 43), new Color(239, 31, 40),
+            new Color(37, 175, 75), new Color(64, 67, 207),
+            new Color(165, 71, 164), new Color(20, 161, 234)};
 
     private final Board board;
 
