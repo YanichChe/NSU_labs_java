@@ -9,7 +9,7 @@ import java.util.TimerTask;
 
 public class Tetris extends JFrame {
     public static final int DELAY = 100;
-    public static final int PERIOD = 400;
+    public static final int PERIOD = 800;
 
     private final Board board;
     private final BoardController boardController;
@@ -27,7 +27,7 @@ public class Tetris extends JFrame {
         boardDrawer.setFocusable(true);
         boardDrawer.addKeyListener(new TetrisKeyAdapter());
         boardDrawer.setFocusable(true);
-        boardDrawer.setBackground(new Color(0Xf0e2d3));
+        boardDrawer.setBackground(new Color(0xFFFFFF));
         boardDrawer.setBorder(BorderFactory.createLineBorder(Color.GREEN, 4));
 
         add(boardDrawer);
@@ -84,14 +84,8 @@ public class Tetris extends JFrame {
                     if(boardController.ableMove(board.getCurrentFigure(), new Point(board.getCurX() + 1, board.getCurY())))
                         boardController.move(board.getCurrentFigure(), new Point(board.getCurX() + 1, board.getCurY()));
                 }
-                case KeyEvent.VK_DOWN -> {
-                    if(boardController.ableMove(board.getCurrentFigure().rotateRight(), new Point(board.getCurX() + 1, board.getCurY())))
-                        boardController.move(board.getCurrentFigure().rotateRight(), new Point(board.getCurX() + 1, board.getCurY()));
-                }
-                case KeyEvent.VK_UP -> {
-                    if(boardController.ableMove(board.getCurrentFigure().rotateLeft(), new Point(board.getCurX() + 1, board.getCurY())))
-                        boardController.move(board.getCurrentFigure().rotateLeft(), new Point(board.getCurX() + 1, board.getCurY()));
-                }
+                case KeyEvent.VK_DOWN -> boardController.rotate(BoardController.ROTATION.LEFT);
+                case KeyEvent.VK_UP -> boardController.rotate(BoardController.ROTATION.RIGHT);
                 case KeyEvent.VK_SPACE -> boardController.dropDown();
                 case KeyEvent.VK_D -> boardController.down();
             }
