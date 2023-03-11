@@ -21,7 +21,17 @@ public class Push extends Command
 
         try
         {
-            stack.push(Double.valueOf(variables.get(args[1])));
+            var actualValue = 0.0;
+            if(variables.containsKey(args[1]))
+            {
+                actualValue = variables.get(args[1]);
+            }
+            else
+            {
+                actualValue = Double.valueOf(args[1]);
+            }
+
+            stack.push(actualValue);
         }
 
         catch (NullPointerException e)

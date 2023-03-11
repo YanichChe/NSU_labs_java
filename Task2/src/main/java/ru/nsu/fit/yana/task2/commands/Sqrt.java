@@ -19,6 +19,7 @@ public class Sqrt extends Command
 
         if (var < 0) throw new NegativeNumberException();
 
+        stack.pop();
         stack.push(Math.sqrt(var));
     }
 }
