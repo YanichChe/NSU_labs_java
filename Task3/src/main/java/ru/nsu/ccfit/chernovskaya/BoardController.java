@@ -1,10 +1,10 @@
-package main.java.ru.nsu.ccfit.chernovskaya;
+package ru.nsu.ccfit.chernovskaya;
 
 import java.awt.*;
 
-import static main.java.ru.nsu.ccfit.chernovskaya.Board.BOARD_HEIGHT;
-import static main.java.ru.nsu.ccfit.chernovskaya.Board.BOARD_WIDTH;
-import static main.java.ru.nsu.ccfit.chernovskaya.Figure.FIGURE_SIZE;
+import static ru.nsu.ccfit.chernovskaya.Board.BOARD_HEIGHT;
+import static ru.nsu.ccfit.chernovskaya.Board.BOARD_WIDTH;
+import static ru.nsu.ccfit.chernovskaya.Figure.FIGURE_SIZE;
 
 /**
  * Class which manages board and boardDrawer

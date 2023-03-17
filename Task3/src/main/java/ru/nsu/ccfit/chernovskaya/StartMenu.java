@@ -1,23 +1,20 @@
-package main.java.ru.nsu.ccfit.chernovskaya;
+package ru.nsu.ccfit.chernovskaya;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class StartMenu extends JFrame {
 
-    private final JPanel jPanel;
-    private final JButton jButton;
-
     public StartMenu(){
-        jPanel = new JPanel();
-        jButton = new JButton();
+        JButton jButton = new JButton();
+        Container container = new Container();
 
-        init();
-    }
-
-    public void init(){
+        JPanel contentPane = new JPanel() {
+            public void paintComponent(Graphics g) {
+                Image img = Toolkit.getDefaultToolkit().getImage(StartMenu.class.getResource("/tetris_back.jpg"));
+                g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
+            }
+        };
 
         setTitle("Tetris");
         setSize(400, 600);
@@ -26,18 +23,21 @@ public class StartMenu extends JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
 
+        container.setLayout(new FlowLayout( FlowLayout.CENTER, 10, 10));
+
         jButton.setText("Start");
         jButton.setFont(new Font(null, Font.BOLD,20));
-        jButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-                new Tetris().setVisible(true);
-            }
+        jButton.addActionListener(e -> {
+            dispose();
+            new Tetris().setVisible(true);
         });
-        jButton.setSize(500, 500);
 
-        jPanel.add(jButton, BorderLayout.CENTER);
-        add(jPanel);
+        jButton.setBackground(Color.LIGHT_GRAY);
+        container.add(jButton);
+
+        contentPane.add(container);
+        setContentPane(contentPane);
+        setVisible(true);
     }
+
 }

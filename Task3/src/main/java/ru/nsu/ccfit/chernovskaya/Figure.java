@@ -1,4 +1,4 @@
-package main.java.ru.nsu.ccfit.chernovskaya;
+package ru.nsu.ccfit.chernovskaya;
 
 import java.awt.*;
 import java.util.Random;
