@@ -41,6 +41,7 @@ public class Tetris extends JFrame {
         setResizable(false);
         setLocationRelativeTo(null);
         setResizable(false);
+        setVisible(true);
     }
 
     public void start() {
@@ -68,6 +69,8 @@ public class Tetris extends JFrame {
             } else {
                 timer.cancel();
                 timer.purge();
+                statusBar.setStatusBarText("Game over");
+                FinishDialog finishDialog = new FinishDialog(Tetris.this);
             }
         }
     }

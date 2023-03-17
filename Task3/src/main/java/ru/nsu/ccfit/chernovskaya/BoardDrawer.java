@@ -24,13 +24,17 @@ public class BoardDrawer extends JPanel {
     public BoardDrawer(Board board) {
         this.board = board;
         setBackground(new Color(0xFFFFFF));
-        setBorder(BorderFactory.createLineBorder(Color.GRAY, 4));
+        //setBorder(BorderFactory.createLineBorder(Color.GRAY, 4));
     }
 
     @Override
     public void paintComponent(Graphics g) {
 
         super.paintComponent(g);
+
+        Image img = Toolkit.getDefaultToolkit().getImage(StartMenu.class.getResource("/game_background.png"));
+        g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
+
         drawBoard(g);
     }
 

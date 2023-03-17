@@ -10,6 +10,7 @@ public class StatusBar extends JPanel {
         score = new JLabel();
         score.setText("Score: 0");
         score.setFont(new Font(null, Font.BOLD, 20));
+        setBackground(new Color(120,126,165));
         add(score);
     }
 
