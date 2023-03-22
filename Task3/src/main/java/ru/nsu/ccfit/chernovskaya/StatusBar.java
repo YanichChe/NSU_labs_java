@@ -3,6 +3,9 @@ package ru.nsu.ccfit.chernovskaya;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Status bar, displays the number of points received for this game
+ */
 public class StatusBar extends JPanel {
 
     private final JLabel score;
