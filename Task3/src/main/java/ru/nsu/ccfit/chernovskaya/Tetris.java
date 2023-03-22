@@ -7,6 +7,10 @@ import java.awt.event.KeyEvent;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * The main class of the game that creates the main
+ * components of the window and launches the game
+ */
 public class Tetris extends JFrame {
     public static final int DELAY = 100;
     public static final int PERIOD = 700;
@@ -84,12 +88,16 @@ public class Tetris extends JFrame {
             int keycode = e.getKeyCode();
             switch (keycode) {
                 case KeyEvent.VK_LEFT -> {
-                    if(boardController.ableMove(board.getCurrentFigure(), new Point(board.getCurX() - 1, board.getCurY())))
-                        boardController.move(board.getCurrentFigure(), new Point(board.getCurX() - 1, board.getCurY()));
+                    if(boardController.ableMove(board.getCurrentFigure(),
+                            new Point(board.getCurX() - 1, board.getCurY())))
+                        boardController.move(board.getCurrentFigure(),
+                                new Point(board.getCurX() - 1, board.getCurY()));
                 }
                 case KeyEvent.VK_RIGHT -> {
-                    if(boardController.ableMove(board.getCurrentFigure(), new Point(board.getCurX() + 1, board.getCurY())))
-                        boardController.move(board.getCurrentFigure(), new Point(board.getCurX() + 1, board.getCurY()));
+                    if(boardController.ableMove(board.getCurrentFigure(),
+                            new Point(board.getCurX() + 1, board.getCurY())))
+                        boardController.move(board.getCurrentFigure(),
+                                new Point(board.getCurX() + 1, board.getCurY()));
                 }
                 case KeyEvent.VK_DOWN -> boardController.rotate(BoardController.Rotation.LEFT);
                 case KeyEvent.VK_UP -> boardController.rotate(BoardController.Rotation.RIGHT);
