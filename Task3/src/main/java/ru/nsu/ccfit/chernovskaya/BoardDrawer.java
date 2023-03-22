@@ -9,6 +9,7 @@ import java.awt.*;
  * <p>Private fields: Board board</p>
  */
 public class BoardDrawer extends JPanel {
+    public final static String backgroundPictureName = "/game_background.png";
     public final static Color[] colors = {
             new Color(0, 0, 0), new Color(253, 200, 18),
             new Color(255, 126, 43), new Color(239, 31, 40),
@@ -32,7 +33,7 @@ public class BoardDrawer extends JPanel {
 
         super.paintComponent(g);
 
-        Image img = Toolkit.getDefaultToolkit().getImage(StartMenu.class.getResource("/game_background.png"));
+        Image img = Toolkit.getDefaultToolkit().getImage(StartMenu.class.getResource(backgroundPictureName));
         g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
 
         drawBoard(g);

@@ -12,6 +12,7 @@ import java.util.TimerTask;
  * components of the window and launches the game
  */
 public class Tetris extends JFrame {
+    public final static String gameName = "Tetris";
     public static final int DELAY = 100;
     public static final int PERIOD = 700;
 
@@ -39,7 +40,7 @@ public class Tetris extends JFrame {
         add(statusBar, BorderLayout.NORTH);
         add(boardDrawer);
 
-        setTitle("Tetris");
+        setTitle(gameName);
         setSize(400, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);

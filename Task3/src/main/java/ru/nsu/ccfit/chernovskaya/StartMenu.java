@@ -9,18 +9,21 @@ import java.awt.*;
  */
 public class StartMenu extends JFrame {
 
+    public final static String backgroundPictureName = "/tetris_background.png";
+    public final static String gameName = "Tetris";
+
     public StartMenu(){
         JButton jButton = new JButton();
         Container container = new Container();
 
         JPanel contentPane = new JPanel(new GridBagLayout()) {
             public void paintComponent(Graphics g) {
-                Image img = Toolkit.getDefaultToolkit().getImage(StartMenu.class.getResource("/tetris_background.png"));
+                Image img = Toolkit.getDefaultToolkit().getImage(StartMenu.class.getResource(backgroundPictureName));
                 g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
             }
         };
 
-        setTitle("Tetris");
+        setTitle(gameName);
         setSize(400, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
