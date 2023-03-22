@@ -3,6 +3,10 @@ package ru.nsu.ccfit.chernovskaya;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * The window that opens first when the application is loaded.
+ * The only Start button starts the game (a Tetris class is created)
+ */
 public class StartMenu extends JFrame {
 
     public StartMenu(){
@@ -43,5 +47,4 @@ public class StartMenu extends JFrame {
         setContentPane(contentPane);
         setVisible(true);
     }
-
 }
