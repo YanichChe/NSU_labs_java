@@ -66,6 +66,16 @@ public class Figure {
         return minY;
     }
 
+    int getMaxY(){
+        int maxY = (int) coordinates[0].getY();
+
+        for (int i = 1; i < FIGURE_SIZE; i++) {
+            maxY = Math.max(maxY, (int) coordinates[i].getY());
+        }
+
+        return maxY;
+    }
+
     public Tetrominoe getFigureName() {
         return this.figureName;
     }
