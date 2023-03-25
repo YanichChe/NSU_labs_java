@@ -15,7 +15,7 @@ public class StartMenu extends JFrame {
     public StartMenu(){
         JButton jButton = new JButton();
         Container container = new Container();
-        MenuBar menuBar = new MenuBar();
+        MenuBar menuBar = new MenuBar(this);
 
         JPanel contentPane = new JPanel(new GridBagLayout()) {
             public void paintComponent(Graphics g) {
