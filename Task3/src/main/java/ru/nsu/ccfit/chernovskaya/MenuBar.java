@@ -59,11 +59,11 @@ public class MenuBar extends JMenuBar
                 int answer = JOptionPane.showOptionDialog(null,
                         "Do you want to exit?",
                         "EXIT",
-                        JOptionPane.DEFAULT_OPTION,
+                        JOptionPane.YES_NO_OPTION,
                         JOptionPane.QUESTION_MESSAGE,
                         null, null, null);
 
-                if (answer == JOptionPane.OK_OPTION){
+                if (answer == JOptionPane.YES_OPTION){
                     parentsFrame.dispose();
                 }
             }
