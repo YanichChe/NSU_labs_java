@@ -1,0 +1,4 @@
+Tetris
+version: 1.0.0
+author: Chernovskaya Yana
+source code: https://github.com/YanichChe/NSU_labs_java
