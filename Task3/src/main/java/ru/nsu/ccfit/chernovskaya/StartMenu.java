@@ -15,6 +15,7 @@ public class StartMenu extends JFrame {
     public StartMenu(){
         JButton jButton = new JButton();
         Container container = new Container();
+        MenuBar menuBar = new MenuBar();
 
         JPanel contentPane = new JPanel(new GridBagLayout()) {
             public void paintComponent(Graphics g) {
@@ -47,6 +48,7 @@ public class StartMenu extends JFrame {
 
         container.add(jButton);
         contentPane.add(container);
+        setJMenuBar(menuBar);
         setContentPane(contentPane);
         setVisible(true);
     }
