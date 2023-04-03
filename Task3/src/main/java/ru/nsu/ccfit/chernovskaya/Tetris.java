@@ -26,7 +26,7 @@ public class Tetris extends JFrame {
         board = new Board();
         boardDrawer = new BoardDrawer(board);
         statusBar = new StatusBar();
-        boardController = new BoardController(board, boardDrawer, statusBar);
+        boardController = new BoardController(board, statusBar);
         timer = new Timer();
 
         init();
@@ -39,6 +39,7 @@ public class Tetris extends JFrame {
 
         add(statusBar, BorderLayout.NORTH);
         add(boardDrawer);
+        boardController.setComponent(boardDrawer);
 
         setTitle(gameName);
         setSize(400, 600);
@@ -89,22 +90,36 @@ public class Tetris extends JFrame {
 
             int keycode = e.getKeyCode();
             switch (keycode) {
-                case KeyEvent.VK_LEFT -> {
+                case KeyEvent.VK_LEFT:{
                     if(boardController.ableMove(board.getCurrentFigure(),
                             new Point(board.getCurX() - 1, board.getCurY())))
                         boardController.move(board.getCurrentFigure(),
                                 new Point(board.getCurX() - 1, board.getCurY()));
+                    break;
                 }
-                case KeyEvent.VK_RIGHT -> {
+                case KeyEvent.VK_RIGHT:{
                     if(boardController.ableMove(board.getCurrentFigure(),
                             new Point(board.getCurX() + 1, board.getCurY())))
                         boardController.move(board.getCurrentFigure(),
                                 new Point(board.getCurX() + 1, board.getCurY()));
+                    break;
                 }
-                case KeyEvent.VK_DOWN -> boardController.rotate(BoardController.Rotation.LEFT);
-                case KeyEvent.VK_UP -> boardController.rotate(BoardController.Rotation.RIGHT);
-                case KeyEvent.VK_SPACE -> boardController.dropDown();
-                case KeyEvent.VK_D -> boardController.down();
+                case KeyEvent.VK_DOWN: {
+                    boardController.rotate(BoardController.Rotation.LEFT);
+                    break;
+                }
+                case KeyEvent.VK_UP: {
+                    boardController.rotate(BoardController.Rotation.RIGHT);
+                    break;
+                }
+                case KeyEvent.VK_SPACE: {
+                    boardController.dropDown();
+                    break;
+                }
+                case KeyEvent.VK_D: {
+                    boardController.down();
+                    break;
+                }
             }
         }
     }
