@@ -1,5 +1,8 @@
 package ru.nsu.ccfit.chernovskaya;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.awt.*;
 
 /**
@@ -10,6 +13,8 @@ import java.awt.*;
  *                     Tetrominoe[] boardField</p>
  *
  */
+@Getter
+@Setter
 public class Board {
     public final static int BOARD_WIDTH = 10;
     public final static int BOARD_HEIGHT = 20;
@@ -54,47 +59,8 @@ public class Board {
         return Figure.Tetrominoe.Empty;
     }
 
-    public void setCurrentFigure(Figure currentFigure) {
-        this.currentFigure = currentFigure;
-    }
-
-    public Figure getCurrentFigure() {
-        return this.currentFigure;
-    }
-
-    public boolean isFellStatus() {
-        return fellStatus;
-    }
-
-    public void setFellStatus(boolean fellStatus) {
-        this.fellStatus = fellStatus;
-    }
-
-    public int getCurX() {
-        return curX;
-    }
-
-    public int getCurY() {
-        return curY;
-    }
-
-    public int getNumberLinesRemoved() {
-        return numberLinesRemoved;
-    }
-
     public void addNumberLinesRemoved(int lines) {
         numberLinesRemoved += lines;
     }
 
-    public void setCurX(int curX) {
-        this.curX = curX;
-    }
-
-    public void setCurY(int curY) {
-        this.curY = curY;
-    }
-
-    public Figure.Tetrominoe[] getBoardField() {
-        return boardField;
-    }
 }
