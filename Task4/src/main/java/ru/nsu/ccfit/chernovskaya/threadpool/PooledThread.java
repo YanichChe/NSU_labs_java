@@ -1,20 +1,17 @@
 package ru.nsu.ccfit.chernovskaya.threadpool;
 
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-import ru.nsu.ccfit.chernovskaya.product.Product;
 
 import java.util.List;
 
 @Log4j2
+@Setter
+@Getter
 public class PooledThread extends Thread {
-    private final List<Task> taskQueue;
-
-    public PooledThread(String name, List<Task> taskQueue) {
-        super(name);
-        this.taskQueue = taskQueue;
-    }
+     public List<Task> taskQueue;
+     private int ID;
 
     public void run() {
         Task currentTask;
@@ -23,10 +20,10 @@ public class PooledThread extends Thread {
                 if (taskQueue.isEmpty()) {
                     try {
                         taskQueue.wait();
-                        log.info("no tasks");
+                        log.info(" no tasks");
                     }
                     catch (InterruptedException e) {
-                        log.warn(taskQueue.get(0) + "was interrupted");
+                        log.warn(taskQueue.get(0) + " was interrupted");
                     }
                     continue;
                 }
@@ -36,7 +33,6 @@ public class PooledThread extends Thread {
             }
             try {
                 currentTask.exec();
-                log.info(currentTask.getTaskName() + "start");
             } catch (InterruptedException e) {
                 log.warn(e.getMessage());
             }
