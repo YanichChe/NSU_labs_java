@@ -7,7 +7,6 @@ import org.apache.log4j.Logger;
 @Getter
 public abstract class Product {
 
-    protected Logger logger = LogManager.getLogger(Product.class);
     public static int global_ID = 0;
     private int ID;
 

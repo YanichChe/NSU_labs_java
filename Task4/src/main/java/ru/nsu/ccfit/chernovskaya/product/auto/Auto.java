@@ -13,7 +13,7 @@ import ru.nsu.ccfit.chernovskaya.product.Product;
 @Getter
 @Setter
 @ToString
-
+@Log4j2
 public class Auto extends Product {
 
     private Accessory accessory;
@@ -25,7 +25,7 @@ public class Auto extends Product {
         this.accessory = accessory;
         this.body = body;
         this.motor = motor;
-        logger.info("Auto<" + this.getID() + "> (Body: <"+ body.getID() +">, Motor: <"+ motor.getID() +"> ,Accessory:<" + accessory.getID() + ">)");
+        log.info("Auto<" + this.getID() + "> (Body: <"+ body.getID() +">, Motor: <"+ motor.getID() +"> ,Accessory:<" + accessory.getID() + ">)");
     }
 
 }
