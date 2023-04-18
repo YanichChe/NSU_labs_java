@@ -3,10 +3,11 @@ package ru.nsu.ccfit.chernovskaya.factory;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import ru.nsu.ccfit.chernovskaya.product.Product;
-import ru.nsu.ccfit.chernovskaya.product.auto.Accessory;
-import ru.nsu.ccfit.chernovskaya.product.auto.Body;
-import ru.nsu.ccfit.chernovskaya.product.auto.Motor;
+import ru.nsu.ccfit.chernovskaya.factory.product.Product;
+import ru.nsu.ccfit.chernovskaya.factory.product.auto.Accessory;
+import ru.nsu.ccfit.chernovskaya.factory.product.auto.Body;
+import ru.nsu.ccfit.chernovskaya.factory.product.auto.Motor;
+import ru.nsu.ccfit.chernovskaya.factory.warehouse.Warehouse;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
