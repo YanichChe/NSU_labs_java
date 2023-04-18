@@ -1,8 +1,6 @@
-package ru.nsu.ccfit.chernovskaya.product;
+package ru.nsu.ccfit.chernovskaya.factory.product;
 
 import lombok.Getter;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 
 @Getter
 public abstract class Product {

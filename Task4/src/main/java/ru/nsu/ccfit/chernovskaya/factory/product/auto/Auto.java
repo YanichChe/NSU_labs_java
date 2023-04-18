@@ -1,14 +1,11 @@
-package ru.nsu.ccfit.chernovskaya.product.auto;
+package ru.nsu.ccfit.chernovskaya.factory.product.auto;
 
-import com.sun.tools.javac.Main;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.extern.log4j.Log4j2;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-import ru.nsu.ccfit.chernovskaya.product.Product;
+import ru.nsu.ccfit.chernovskaya.factory.product.Product;
 
 @Getter
 @Setter

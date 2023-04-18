@@ -1,4 +1,4 @@
-package ru.nsu.ccfit.chernovskaya.product.auto;
+package ru.nsu.ccfit.chernovskaya.factory.product.auto;
 
 import org.junit.Test;
 

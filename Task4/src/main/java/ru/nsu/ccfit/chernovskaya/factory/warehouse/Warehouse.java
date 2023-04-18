@@ -1,11 +1,9 @@
-package ru.nsu.ccfit.chernovskaya.factory;
+package ru.nsu.ccfit.chernovskaya.factory.warehouse;
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-import ru.nsu.ccfit.chernovskaya.product.Product;
+import ru.nsu.ccfit.chernovskaya.factory.product.Product;
 import java.util.ArrayDeque;
 
 @Getter
