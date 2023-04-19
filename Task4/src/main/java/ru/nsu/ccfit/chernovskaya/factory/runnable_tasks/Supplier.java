@@ -1,4 +1,4 @@
-package ru.nsu.ccfit.chernovskaya.factory.runnable_asks;
+package ru.nsu.ccfit.chernovskaya.factory.runnable_tasks;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
