@@ -3,7 +3,6 @@ package ru.nsu.ccfit.chernovskaya.factory.config_parser;
 import java.io.InputStream;
 import java.util.Properties;
 
-import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
@@ -66,17 +65,17 @@ public class ConfigParser {
     }
 
     public int getSupplierCount(){
-        int supplierCount = Integer.parseInt(configProperties.getProperty("Suppliers", "0"));
+        int supplierCount = Integer.parseInt(configProperties.getProperty("SuppliersCount", "0"));
         return supplierCount;
     }
 
     public int getWorkerCount(){
-        int workerCount = Integer.parseInt(configProperties.getProperty("Workers", "0"));
+        int workerCount = Integer.parseInt(configProperties.getProperty("WorkersCount", "0"));
         return workerCount;
     }
 
     public int getDealerCount(){
-        int dealerCount = Integer.parseInt(configProperties.getProperty("Dealers", "0"));
+        int dealerCount = Integer.parseInt(configProperties.getProperty("DealersCount", "0"));
         return dealerCount;
     }
 
