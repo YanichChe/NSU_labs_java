@@ -14,6 +14,7 @@ public class Warehouse<T extends Product> {
     public final static String ACCESSORY_WAREHOUSE_NAME = "Accessory warehouse";
     public final static String BODY_WAREHOUSE_NAME = "Body warehouse";
     public final static String MOTOR_WAREHOUSE_NAME = "Motor warehouse";
+    public final static String AUTO_WAREHOUSE_NAME = "Auto warehouse";
 
     private final String warehouseName;
     private final ArrayDeque<T> products;
