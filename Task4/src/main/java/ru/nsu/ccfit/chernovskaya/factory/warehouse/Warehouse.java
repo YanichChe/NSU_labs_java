@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 import ru.nsu.ccfit.chernovskaya.factory.product.Product;
+
 import java.util.ArrayDeque;
 
 @Getter
@@ -20,6 +21,7 @@ public class Warehouse<T extends Product> {
     private final ArrayDeque<T> products;
     private final int warehouseCapacity;
 
+    @Getter private int totalProductCount = 0;
     private final Object monitor = new Object();
 
     public Warehouse(int warehouseCapacity, String warehouseName) {
@@ -42,8 +44,13 @@ public class Warehouse<T extends Product> {
             }
             log.info(warehouseName + " got new product " + newItem.getClass().getName() + " ID: " + newItem.getID());
             products.add(newItem);
+            totalProductCount++;
             monitor.notify();
         }
+    }
+
+    public int getCurrentWarehouseSize(){
+        return products.size();
     }
 
     public T deliver () throws InterruptedException {
