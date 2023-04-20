@@ -13,14 +13,15 @@ public class PooledThread extends Thread {
      public List<Task> taskQueue;
      private int ID;
 
+     @Override
     public void run() {
         Task currentTask;
-        while (true) {
+        while (!isInterrupted()) {
             synchronized (taskQueue) {
                 if (taskQueue.isEmpty()) {
                     try {
                         taskQueue.wait();
-                        log.info(" no tasks");
+                        log.info("Thread " + ID + " has no tasks");
                     }
                     catch (InterruptedException e) {
                         log.warn(taskQueue.get(0) + " was interrupted");
@@ -29,6 +30,7 @@ public class PooledThread extends Thread {
                 }
                 else {
                     currentTask = taskQueue.remove(0);
+                    log.info("Task"  + ID + " get task");
                 }
             }
             try {

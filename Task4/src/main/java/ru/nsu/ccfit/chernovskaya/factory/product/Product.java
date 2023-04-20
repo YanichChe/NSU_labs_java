@@ -7,9 +7,12 @@ public abstract class Product {
 
     public static int global_ID = 0;
     private int ID;
+    private final Object monitor = new Object();
 
     public Product(){
-        ID = global_ID;
-        global_ID++;
+        synchronized (monitor){
+            ID = global_ID;
+            global_ID++;
+        }
     }
 }

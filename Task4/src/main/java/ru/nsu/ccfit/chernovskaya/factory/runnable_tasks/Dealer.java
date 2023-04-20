@@ -15,21 +15,24 @@ public class Dealer implements Runnable{
     public Dealer(Warehouse<Auto> autoWarehouse, int dealerDelay){
         this.autoWarehouse = autoWarehouse;
         this.dealerDelay = dealerDelay;
+        log.info("Dealer was creates");
     }
 
-    @SneakyThrows
     @Override
     public void run() {
         while (true) {
-            currentAuto = autoWarehouse.deliver();
-            log.info("Dealer bought : Auto<" + currentAuto.getID() + "> " +
-                    "(Body:<" + currentAuto.getBody().getID() + ">, " +
-                    "Motor:<" + currentAuto.getMotor().getID() + ">, " +
-                    "Accessory:<" + currentAuto.getAccessory().getID() + ">)");
+            try {
+                currentAuto = autoWarehouse.deliver();
+                log.info("Dealer bought : Auto<" + currentAuto.getID() + "> " + "(Body:<" + currentAuto.getBody().getID() + ">, " + "Motor:<" + currentAuto.getMotor().getID() + ">, " + "Accessory:<" + currentAuto.getAccessory().getID() + ">)");
 
-            try{
-                Thread.sleep(dealerDelay);
-            } catch (InterruptedException e){
+                try {
+                    Thread.sleep(dealerDelay);
+                }
+                catch (InterruptedException e) {
+                    log.warn(e.getMessage());
+                }
+            }
+            catch (InterruptedException e){
                 log.warn(e.getMessage());
             }
 

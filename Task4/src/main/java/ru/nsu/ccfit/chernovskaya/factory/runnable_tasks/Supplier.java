@@ -28,7 +28,7 @@ public class Supplier<T extends Product> implements Runnable{
 
     @Override
     public void run() {
-        while (!Thread.currentThread().isInterrupted()){
+        while (true){
             try {
                 T product = productClass.getDeclaredConstructor().newInstance();
                 warehouse.put(product);
@@ -39,7 +39,6 @@ public class Supplier<T extends Product> implements Runnable{
             }
             catch (InvocationTargetException | InstantiationException | IllegalAccessException | NoSuchMethodException e) {
                 log.error(e.getMessage());
-                Thread.currentThread().interrupt();
             }
         }
     }

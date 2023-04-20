@@ -17,6 +17,10 @@ public class ThreadPool{
         }
     }
 
+    public int getTaskQueueSize(){
+        return taskQueue.size();
+    }
+
     public void addThread(PooledThread taskThread) {
         taskThread.setTaskQueue(taskQueue);
         threads.add(taskThread);
