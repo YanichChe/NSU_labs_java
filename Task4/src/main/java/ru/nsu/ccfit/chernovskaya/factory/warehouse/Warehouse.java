@@ -1,16 +1,21 @@
 package ru.nsu.ccfit.chernovskaya.factory.warehouse;
 
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 import ru.nsu.ccfit.chernovskaya.factory.product.Product;
+import ru.nsu.ccfit.chernovskaya.observer.Observable;
+import ru.nsu.ccfit.chernovskaya.observer.Observer;
 
 import java.util.ArrayDeque;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
 @Log4j2
-public class Warehouse<T extends Product> {
+public class Warehouse<T extends Product> implements Observable {
 
     public final static String ACCESSORY_WAREHOUSE_NAME = "Accessory warehouse";
     public final static String BODY_WAREHOUSE_NAME = "Body warehouse";
@@ -24,6 +29,8 @@ public class Warehouse<T extends Product> {
     @Getter private int totalProductCount = 0;
     private final Object monitor = new Object();
 
+    private Set<Observer> observers = new HashSet<>();
+
     public Warehouse(int warehouseCapacity, String warehouseName) {
         this.products = new ArrayDeque<>();
         this.warehouseCapacity = warehouseCapacity;
@@ -31,9 +38,9 @@ public class Warehouse<T extends Product> {
         log.info(warehouseName + " was create, capacity:"+ warehouseCapacity);
     }
 
-    public void put (T newItem) throws InterruptedException {
+    public void put (@NonNull T newItem) throws InterruptedException {
         synchronized (monitor) {
-            if (products.size() >= warehouseCapacity) {
+            while (products.size() >= warehouseCapacity && !Thread.currentThread().isInterrupted()) {
                 try {
                     log.info(warehouseName + " is full");
                     monitor.wait();
@@ -44,7 +51,11 @@ public class Warehouse<T extends Product> {
             }
             log.info(warehouseName + " got new product " + newItem.getClass().getName() + " ID: " + newItem.getID());
             products.add(newItem);
+            log.info(warehouseName + " current size is " + products.size());
+
             totalProductCount++;
+            notifyObservers();
+
             monitor.notify();
         }
     }
@@ -57,17 +68,16 @@ public class Warehouse<T extends Product> {
         synchronized (monitor) {
             while (true) {
                 try {
-                    log.info(warehouseName + " current size is " + products.size());
                     if (!products.isEmpty()) {
                         T item = products.getFirst();
                         products.remove();
-                        monitor.notify();
+                        log.info(warehouseName + " current size is " + products.size());
+                        notifyObservers();
+                        monitor.notifyAll();
                         log.info(warehouseName + " delivered ");
                         return item;
                     } else {
-                        log.info(warehouseName + " is waiting products");
                         monitor.wait();
-                        log.info(warehouseName + " continue");
                     }
                 } catch (InterruptedException e) {
                     log.info(warehouseName + " is interrupted");
@@ -75,5 +85,22 @@ public class Warehouse<T extends Product> {
                 }
             }
         }
+    }
+
+
+    @Override
+    public void registerObserver(Observer o) {
+        observers.add(o);
+    }
+
+    @Override
+    public void removeObserver(Observer o) {
+        observers.remove(o);
+    }
+
+    @Override
+    public void notifyObservers() {
+        for (Observer observer : observers)
+            observer.update(getCurrentWarehouseSize(), totalProductCount);
     }
 }
