@@ -1,6 +1,7 @@
 package ru.nsu.ccfit.chernovskaya.factory;
 
 import lombok.extern.log4j.Log4j2;
+import ru.nsu.ccfit.chernovskaya.factory.autoWarehouseController.AutoWarehouseController;
 import ru.nsu.ccfit.chernovskaya.factory.config_parser.ConfigParser;
 import ru.nsu.ccfit.chernovskaya.factory.product.auto.Accessory;
 import ru.nsu.ccfit.chernovskaya.factory.product.auto.Auto;
@@ -10,6 +11,7 @@ import ru.nsu.ccfit.chernovskaya.factory.runnable_tasks.Dealer;
 import ru.nsu.ccfit.chernovskaya.factory.runnable_tasks.Supplier;
 import ru.nsu.ccfit.chernovskaya.factory.warehouse.Warehouse;
 import ru.nsu.ccfit.chernovskaya.factory.worker.WorkerThreadPool;
+import ru.nsu.ccfit.chernovskaya.observer.Observer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +34,8 @@ public class AutoFactory {
     private final Thread motorSupplierThread;
     private final Thread accessorySupplierThread;
     private final Thread bodySupplierThread;
+
+    private final AutoWarehouseController autoWarehouseController;
 
 
     public AutoFactory(){
@@ -63,7 +67,10 @@ public class AutoFactory {
         accessorySupplierThread = new Thread(accessorySupplier);
         bodySupplierThread = new Thread(bodySupplier);
 
-
+        log.info("Creating auto warehouse controller..");
+        autoWarehouseController = new AutoWarehouseController(bodyWarehouse, accessoryWarehouse,
+                                                              motorWarehouse, autoWarehouse,
+                                                                workerThreadPool);
     }
 
     public void start() {
@@ -81,6 +88,21 @@ public class AutoFactory {
         }
     }
 
+    public void addBodyWarehouseObserver(Observer observer){
+        bodyWarehouse.registerObserver(observer);
+    }
+
+    public void addMotorWarehouseObserver(Observer observer){
+        motorWarehouse.registerObserver(observer);
+    }
+
+    public void addAccessoryWarehouseObserver(Observer observer){
+        accessoryWarehouse.registerObserver(observer);
+    }
+
+    public void addAutoWarehouseObserver(Observer observer){
+        autoWarehouse.registerObserver(observer);
+    }
     public void setMotorSupplierDelay(int delay){
         motorSupplier.setSupplierDelay(delay);
     }
