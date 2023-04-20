@@ -14,6 +14,6 @@ public class Worker extends PooledThread {
     public Worker() {
         super.setID(global_ID);
         global_ID++;
-        log.info("Worker:" + super.getID() + "was created");
+        log.info("Worker:" + super.getID() + " was created");
     }
 }
