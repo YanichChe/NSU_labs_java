@@ -15,6 +15,11 @@ public class WorkerThreadPool {
         }
     }
 
+    public int getCurrentQueueTasksSize()
+    {
+        return threadPool.getTaskQueueSize();
+    }
+
     public void addTask(Task task) {
         threadPool.addTask(task);
     }
