@@ -11,7 +11,6 @@ import ru.nsu.ccfit.chernovskaya.threadpool.Task;
 
 @RequiredArgsConstructor
 @Log4j2
-
 public class BuildCar implements Task {
     private final Warehouse<Accessory> accessoryWarehouse;
     private final Warehouse<Motor> motorWarehouse;
@@ -20,15 +19,13 @@ public class BuildCar implements Task {
 
     @Override
     public void exec() throws InterruptedException {
-        while (!Thread.currentThread().isInterrupted()) {
-            Accessory accessory= accessoryWarehouse.deliver();
-            Body body = bodyWarehouse.deliver();
-            Motor motor = motorWarehouse.deliver();
+        Accessory accessory= accessoryWarehouse.deliver();
+        Body body = bodyWarehouse.deliver();
+        Motor motor = motorWarehouse.deliver();
 
-            Auto auto = new Auto(accessory, body, motor);
-            autoWarehouse.put(auto);
+        Auto auto = new Auto(accessory, body, motor);
+        autoWarehouse.put(auto);
 
-            log.info(Thread.currentThread() + " build");
-        }
+        log.info(Thread.currentThread() + " build");
     }
 }
