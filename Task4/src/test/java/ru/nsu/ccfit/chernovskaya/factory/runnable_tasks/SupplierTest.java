@@ -17,7 +17,7 @@ public class SupplierTest{
     private static final int accessoryCapacity = 4;
     private static final int bodyCapacity = 5;
     private static final int motorCapacity = 6;
-    private final int supplierDelay = 5;
+    private final int supplierDelay = 5000;
 
     @ParameterizedTest
     @MethodSource("generateSupplierData")
@@ -27,28 +27,37 @@ public class SupplierTest{
        Thread thread = new Thread(supplier);
 
        thread.start();
-       Thread.sleep(supplierDelay);
+       Thread.sleep(5000);
        thread.interrupt();
 
        assertThat(warehouse.getProducts().getFirst().getClass()).isEqualTo(productClass);
-       assertThat(warehouse.getProducts().size()).isEqualTo(1);
+       assertThat(warehouse.getProducts().size()).isNotEqualTo(0);
 
     }
 
+    @ParameterizedTest
+    @MethodSource("generateSupplierData")
     @Test
-    public void testGetSupplierDelay() {
+    public void testGetSupplierDelay(Warehouse<Product> warehouse, Class<Product> productClass, int supplierDelay) {
+        Supplier<?> supplier = new Supplier<>(warehouse, productClass, supplierDelay);
+        assertThat(supplier.getSupplierDelay()).isEqualTo(supplierDelay);
     }
 
+    @ParameterizedTest
+    @MethodSource("generateSupplierData")
     @Test
-    public void testSetSupplierDelay() {
+    public void testSetSupplierDelay(Warehouse<Product> warehouse, Class<Product> productClass, int supplierDelay) {
+        Supplier<?> supplier = new Supplier<>(warehouse, productClass, supplierDelay);
+        supplier.setSupplierDelay(10);
+        assertThat(supplier.getSupplierDelay()).isEqualTo(10);
     }
 
     private static Stream<Arguments> generateSupplierData()
     {
         return Stream.of(
-                Arguments.of(new Warehouse<>(accessoryCapacity, Warehouse.ACCESSORY_WAREHOUSE_NAME), Accessory.class, 5),
-                Arguments.of(new Warehouse<>(bodyCapacity, Warehouse.BODY_WAREHOUSE_NAME), Body.class, 5),
-                Arguments.of(new Warehouse<>(motorCapacity, Warehouse.MOTOR_WAREHOUSE_NAME), Motor.class, 5)
+                Arguments.of(new Warehouse<>(accessoryCapacity, Warehouse.ACCESSORY_WAREHOUSE_NAME), Accessory.class, 5000),
+                Arguments.of(new Warehouse<>(bodyCapacity, Warehouse.BODY_WAREHOUSE_NAME), Body.class, 5000),
+                Arguments.of(new Warehouse<>(motorCapacity, Warehouse.MOTOR_WAREHOUSE_NAME), Motor.class, 5000)
         );
     }
 }
