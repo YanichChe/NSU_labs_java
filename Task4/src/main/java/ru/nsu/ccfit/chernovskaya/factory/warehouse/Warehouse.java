@@ -60,10 +60,6 @@ public class Warehouse<T extends Product> implements Observable {
         }
     }
 
-    public int getCurrentWarehouseSize(){
-        return products.size();
-    }
-
     public T deliver () throws InterruptedException {
         synchronized (monitor) {
             while (true) {
@@ -101,6 +97,6 @@ public class Warehouse<T extends Product> implements Observable {
     @Override
     public void notifyObservers() {
         for (Observer observer : observers)
-            observer.update(getCurrentWarehouseSize(), totalProductCount);
+            observer.update(products.size(), totalProductCount);
     }
 }
