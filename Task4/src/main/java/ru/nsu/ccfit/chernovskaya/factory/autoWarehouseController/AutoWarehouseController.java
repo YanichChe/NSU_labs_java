@@ -45,7 +45,7 @@ public class AutoWarehouseController implements Observer {
     @Override
     public void update(int currentProductCount, int totalProductCount) {
 
-        log.error("Data is changed, there is a request to create new machines: current product count = " +
+        log.info("Data is changed, there is a request to create new machines: current product count = " +
                 currentProductCount + " " + " total product count = " + totalProductCount);
         int currentQueueTasksSize = workerThreadPool.getCurrentQueueTasksSize();
 
