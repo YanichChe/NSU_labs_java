@@ -30,9 +30,9 @@ public class Supplier<T extends Product> implements Runnable{
     public void run() {
         while (true){
             try {
+                Thread.sleep(supplierDelay);
                 T product = productClass.getDeclaredConstructor().newInstance();
                 warehouse.put(product);
-                Thread.sleep(supplierDelay);
             } catch (InterruptedException e) {
                 log.info(Thread.currentThread().getName() + " was interrupted");
                 break;
