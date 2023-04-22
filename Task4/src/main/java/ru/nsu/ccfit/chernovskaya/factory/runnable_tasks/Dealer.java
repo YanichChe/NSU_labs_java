@@ -22,15 +22,9 @@ public class Dealer implements Runnable{
     public void run() {
         while (true) {
             try {
+                Thread.sleep(dealerDelay);
                 currentAuto = autoWarehouse.deliver();
                 log.info("Dealer bought : Auto<" + currentAuto.getID() + "> " + "(Body:<" + currentAuto.getBody().getID() + ">, " + "Motor:<" + currentAuto.getMotor().getID() + ">, " + "Accessory:<" + currentAuto.getAccessory().getID() + ">)");
-
-                try {
-                    Thread.sleep(dealerDelay);
-                }
-                catch (InterruptedException e) {
-                    log.warn(e.getMessage());
-                }
             }
             catch (InterruptedException e){
                 log.warn(e.getMessage());
