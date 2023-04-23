@@ -2,9 +2,6 @@ package ru.nsu.ccfit.chernovskaya.factory.worker;
 
 import lombok.extern.log4j.Log4j2;
 import ru.nsu.ccfit.chernovskaya.threadpool.PooledThread;
-import ru.nsu.ccfit.chernovskaya.threadpool.Task;
-
-import java.util.List;
 
 @Log4j2
 public class Worker extends PooledThread {
