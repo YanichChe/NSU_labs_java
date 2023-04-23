@@ -1,7 +1,5 @@
 package ru.nsu.ccfit.chernovskaya.factory.runnable_tasks;
 
-import lombok.Getter;
-import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 import ru.nsu.ccfit.chernovskaya.factory.product.Product;
 import ru.nsu.ccfit.chernovskaya.factory.warehouse.Warehouse;
@@ -10,27 +8,22 @@ import java.lang.reflect.InvocationTargetException;
 
 @Log4j2
 
-public class Supplier<T extends Product> implements Runnable{
+public class Supplier<T extends Product>  extends ProductionParticipant implements Runnable{
 
     private final Warehouse<T> warehouse;
     private final Class<T> productClass;
 
-    @Getter
-    @Setter
-    private int supplierDelay;
-
-    public Supplier(Warehouse<T> warehouse, Class<T> productClass, int supplierDelay) {
+    public Supplier(Warehouse<T> warehouse, Class<T> productClass) {
         this.warehouse = warehouse;
         this.productClass = productClass;
-        this.supplierDelay = supplierDelay;
-        log.info("Supplier for " + warehouse.getWarehouseName() + " with delay " + supplierDelay + " was created");
+        log.info("Supplier for " + warehouse.getWarehouseName() + " was created");
     }
 
     @Override
     public void run() {
         while (true){
             try {
-                Thread.sleep(supplierDelay);
+                Thread.sleep(super.getDelay());
                 T product = productClass.getDeclaredConstructor().newInstance();
                 warehouse.put(product);
             } catch (InterruptedException e) {
@@ -41,5 +34,12 @@ public class Supplier<T extends Product> implements Runnable{
                 log.error(e.getMessage());
             }
         }
+    }
+
+    public int getSupplierDelay(){
+        return super.getDelay();
+    }
+    public void setSupplierDelay(int delay){
+        super.setDelay(delay);
     }
 }

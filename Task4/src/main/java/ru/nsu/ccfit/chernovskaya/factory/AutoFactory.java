@@ -49,9 +49,15 @@ public class AutoFactory {
         autoWarehouse = new Warehouse<>(configParser.getWarehouseAccessoryCapacity(), Warehouse.AUTO_WAREHOUSE_NAME);
 
         log.info("Creating suppliers...");
-        motorSupplier = new Supplier<>(motorWarehouse, Motor.class, configParser.getSupplierDelay());
-        bodySupplier = new Supplier<>(bodyWarehouse, Body.class, configParser.getSupplierDelay());
-        accessorySupplier = new Supplier<>(accessoryWarehouse, Accessory.class, configParser.getSupplierDelay());
+
+        motorSupplier = new Supplier<>(motorWarehouse, Motor.class);
+        motorSupplier.setSupplierDelay(configParser.getSupplierDelay());
+
+        bodySupplier = new Supplier<>(bodyWarehouse, Body.class);
+        bodySupplier.setSupplierDelay(configParser.getSupplierDelay());
+
+        accessorySupplier = new Supplier<>(accessoryWarehouse, Accessory.class);
+        accessorySupplier.setSupplierDelay(configParser.getSupplierDelay());
 
         log.info("Creating worker threadpool...");
         workerThreadPool = new WorkerThreadPool(configParser.getWorkerCount());
@@ -59,7 +65,9 @@ public class AutoFactory {
         log.info("Creating dealers..");
         dealers = new ArrayList<>();
         for (int i = 0; i < configParser.getDealerCount(); ++i) {
-            dealers.add(new Dealer(autoWarehouse, configParser.getDealerDelay()));
+            Dealer dealer = new Dealer(autoWarehouse);
+            dealer.setDealerDelay(configParser.getDealerDelay());
+            dealers.add(dealer);
         }
 
         log.info("Creating threads..");

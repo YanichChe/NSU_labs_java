@@ -1,5 +1,6 @@
 package ru.nsu.ccfit.chernovskaya.factory.runnable_tasks;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 import ru.nsu.ccfit.chernovskaya.factory.product.auto.Accessory;
 import ru.nsu.ccfit.chernovskaya.factory.product.auto.Auto;
@@ -12,10 +13,11 @@ public class DealerTest{
 
     private final int dealerDelay = 5;
     private final Warehouse<Auto> warehouse = new Warehouse<>(5, Warehouse.AUTO_WAREHOUSE_NAME);
-    private final Dealer dealer = new Dealer(warehouse, dealerDelay);
+    private final Dealer dealer = new Dealer(warehouse);
 
     @Test
     public void testTestRun() throws InterruptedException {
+        dealer.setDealerDelay(dealerDelay);
         Motor motor = new Motor();
         Accessory accessory = new Accessory();
         Body body = new Body();
@@ -35,6 +37,7 @@ public class DealerTest{
 
     @Test
     public void testGetDealerDelay() {
+        dealer.setDealerDelay(dealerDelay);
         assertThat(dealer.getDealerDelay()).isEqualTo(dealerDelay);
     }
 

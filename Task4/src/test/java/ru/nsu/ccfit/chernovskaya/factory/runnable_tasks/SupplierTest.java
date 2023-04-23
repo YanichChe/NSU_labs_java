@@ -10,6 +10,7 @@ import ru.nsu.ccfit.chernovskaya.factory.product.auto.Body;
 import ru.nsu.ccfit.chernovskaya.factory.product.auto.Motor;
 import ru.nsu.ccfit.chernovskaya.factory.warehouse.Warehouse;
 import static org.assertj.core.api.Assertions.assertThat;
+import static ru.nsu.ccfit.chernovskaya.GUI.Slider.SEC;
 
 import java.util.stream.Stream;
 
@@ -23,7 +24,9 @@ public class SupplierTest{
     @MethodSource("generateSupplierData")
     public void testTestRun(Warehouse<Product> warehouse, Class<Product> productClass, int supplierDelay) throws InterruptedException {
 
-       Supplier<?> supplier = new Supplier<>(warehouse, productClass, supplierDelay);
+       Supplier<?> supplier = new Supplier<>(warehouse, productClass);
+       supplier.setSupplierDelay(supplierDelay);
+
        Thread thread = new Thread(supplier);
 
        thread.start();
@@ -39,7 +42,8 @@ public class SupplierTest{
     @MethodSource("generateSupplierData")
     @Test
     public void testGetSupplierDelay(Warehouse<Product> warehouse, Class<Product> productClass, int supplierDelay) {
-        Supplier<?> supplier = new Supplier<>(warehouse, productClass, supplierDelay);
+        Supplier<?> supplier = new Supplier<>(warehouse, productClass);
+        supplier.setSupplierDelay(supplierDelay);
         assertThat(supplier.getSupplierDelay()).isEqualTo(supplierDelay);
     }
 
@@ -47,9 +51,10 @@ public class SupplierTest{
     @MethodSource("generateSupplierData")
     @Test
     public void testSetSupplierDelay(Warehouse<Product> warehouse, Class<Product> productClass, int supplierDelay) {
-        Supplier<?> supplier = new Supplier<>(warehouse, productClass, supplierDelay);
-        supplier.setSupplierDelay(10);
-        assertThat(supplier.getSupplierDelay()).isEqualTo(10);
+        Supplier<?> supplier = new Supplier<>(warehouse, productClass);
+        supplier.setSupplierDelay(supplierDelay);
+        supplier.setSupplierDelay(10 * SEC);
+        assertThat(supplier.getSupplierDelay()).isEqualTo(10 * SEC);
     }
 
     private static Stream<Arguments> generateSupplierData()
