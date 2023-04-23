@@ -1,21 +1,17 @@
 package ru.nsu.ccfit.chernovskaya.GUI;
 
-import lombok.Getter;
-import ru.nsu.ccfit.chernovskaya.factory.product.auto.Accessory;
-import ru.nsu.ccfit.chernovskaya.factory.product.auto.Body;
-import ru.nsu.ccfit.chernovskaya.factory.product.auto.Motor;
-
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import java.awt.*;
 
+import static ru.nsu.ccfit.chernovskaya.GUI.FactoryFrame.BACKGROUND_COLOR;
 import static ru.nsu.ccfit.chernovskaya.GUI.Slider.SEC;
 
 public class DealerInfoPanel extends JPanel{
 
-    private final String title = "______________Dealer________";
+    private final String title = "_________Dealer________";
 
     private final GUI_Controller controller;
 
@@ -52,6 +48,8 @@ public class DealerInfoPanel extends JPanel{
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.gridy = 0;
         add(nameLabel, gridBagConstraints);
+
+        this.setBackground(BACKGROUND_COLOR);
 
 
     }

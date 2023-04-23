@@ -11,6 +11,7 @@ import java.awt.*;
 
 public class FactoryFrame extends JFrame {
 
+    public final static Color BACKGROUND_COLOR = new Color(147, 255, 108);
     private static final String TITLE_FRAME = "AUTO Factory";
 
     private final GUI_Controller controller;

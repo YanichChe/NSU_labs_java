@@ -10,7 +10,10 @@ import ru.nsu.ccfit.chernovskaya.observer.Observer;
 import javax.swing.*;
 import java.awt.*;
 
+import static ru.nsu.ccfit.chernovskaya.GUI.FactoryFrame.BACKGROUND_COLOR;
+
 public class ProductInfoPanel extends JPanel implements Observer {
+
     private final String title;
     private final Class<?> _class;
     private final GUI_Controller controller;
@@ -53,6 +56,7 @@ public class ProductInfoPanel extends JPanel implements Observer {
         gridBagConstraints.gridy = 1;
         add(nameLabel, gridBagConstraints);
 
+        this.setBackground(BACKGROUND_COLOR);
 
     }
 
