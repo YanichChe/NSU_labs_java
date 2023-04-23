@@ -1,6 +1,5 @@
 import ru.nsu.ccfit.chernovskaya.GUI.FactoryFrame;
 import ru.nsu.ccfit.chernovskaya.GUI.GUI_Controller;
-import ru.nsu.ccfit.chernovskaya.factory.AutoFactory;
 
 import javax.swing.*;
 
