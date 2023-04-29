@@ -16,14 +16,14 @@ public class ProductInfoPanel extends JPanel implements Observer {
 
     private final String title;
     private final Class<?> _class;
-    private final GUI_Controller controller;
+    private final GUIController controller;
 
     private final JLabel nameLabel = new JLabel();
     private final JLabel totalProductLabel = new JLabel();
     private final JLabel currentProductLabel = new JLabel();
     @Getter private final GridBagConstraints gridBagConstraints = new GridBagConstraints();
 
-    protected ProductInfoPanel(GUI_Controller controller, String title, Class<? extends Product> _class) {
+    protected ProductInfoPanel(GUIController controller, String title, Class<? extends Product> _class) {
 
         this.controller = controller;
         this.title = title;

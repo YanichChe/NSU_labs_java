@@ -16,7 +16,7 @@ public class DetailInfoPanel extends ProductInfoPanel {
 
     private final Slider timeSlider;
 
-    protected DetailInfoPanel(GUI_Controller controller, String title, Class<? extends Product> _class) {
+    protected DetailInfoPanel(GUIController controller, String title, Class<? extends Product> _class) {
 
         super(controller, title, _class);
         timeSlider = new Slider();

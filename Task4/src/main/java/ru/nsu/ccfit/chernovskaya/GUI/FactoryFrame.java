@@ -14,7 +14,7 @@ public class FactoryFrame extends JFrame {
     public final static Color BACKGROUND_COLOR = new Color(147, 255, 108);
     private static final String TITLE_FRAME = "AUTO Factory";
 
-    private final GUI_Controller controller;
+    private final GUIController controller;
 
     private final DetailInfoPanel accessoryInfoPanel;
     private final DetailInfoPanel  bodyInfoPanel;
@@ -23,7 +23,7 @@ public class FactoryFrame extends JFrame {
     private final DealerInfoPanel dealerInfoPanel;
 
 
-    public FactoryFrame(GUI_Controller controller) {
+    public FactoryFrame(GUIController controller) {
         this.controller = controller;
 
         this.accessoryInfoPanel = new DetailInfoPanel(controller, Warehouse.ACCESSORY_WAREHOUSE_NAME, Accessory.class);

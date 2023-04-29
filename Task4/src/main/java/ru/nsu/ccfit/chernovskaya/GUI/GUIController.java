@@ -4,11 +4,11 @@ import ru.nsu.ccfit.chernovskaya.factory.AutoFactory;
 import ru.nsu.ccfit.chernovskaya.observer.Observer;
 
 @Log4j2
-public class GUI_Controller {
+public class GUIController {
 
     private final AutoFactory autoFactory;
 
-    public GUI_Controller(){
+    public GUIController(){
         autoFactory = new AutoFactory();
     }
 

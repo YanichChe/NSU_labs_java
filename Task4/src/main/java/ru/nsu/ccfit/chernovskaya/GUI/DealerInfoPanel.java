@@ -13,12 +13,12 @@ public class DealerInfoPanel extends JPanel{
 
     private final String title = "_________Dealer________";
 
-    private final GUI_Controller controller;
+    private final GUIController controller;
 
     private final JLabel nameLabel = new JLabel();
     private final GridBagConstraints gridBagConstraints = new GridBagConstraints();
 
-    public DealerInfoPanel(GUI_Controller controller){
+    public DealerInfoPanel(GUIController controller){
 
         nameLabel.setText(title);
 
