@@ -6,11 +6,11 @@ import ru.nsu.ccfit.chernovskaya.threadpool.PooledThread;
 @Log4j2
 public class Worker extends PooledThread {
 
-    public static int global_ID = 0;
+    public static int globalID = 0;
 
     public Worker() {
-        super.setID(global_ID);
-        global_ID++;
+        super.setID(globalID);
+        globalID++;
         log.info("Worker:" + super.getID() + " was created");
     }
 }
