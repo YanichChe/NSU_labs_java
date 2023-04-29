@@ -1,5 +1,7 @@
 package ru.nsu.ccfit.chernovskaya.factory;
 
+import java.util.ArrayList;
+import java.util.List;
 import lombok.extern.log4j.Log4j2;
 import ru.nsu.ccfit.chernovskaya.factory.autoWarehouseController.AutoWarehouseController;
 import ru.nsu.ccfit.chernovskaya.factory.config_parser.ConfigParser;
@@ -12,9 +14,6 @@ import ru.nsu.ccfit.chernovskaya.factory.runnable_tasks.Supplier;
 import ru.nsu.ccfit.chernovskaya.factory.warehouse.Warehouse;
 import ru.nsu.ccfit.chernovskaya.factory.worker.WorkerThreadPool;
 import ru.nsu.ccfit.chernovskaya.observer.Observer;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Log4j2
 public class AutoFactory {
@@ -38,15 +37,19 @@ public class AutoFactory {
     private final AutoWarehouseController autoWarehouseController;
 
 
-    public AutoFactory(){
+    public AutoFactory() {
         ConfigParser configParser = new ConfigParser();
         configParser.readProperties();
 
         log.info("Creating warehouses...");
-        accessoryWarehouse = new Warehouse<>(configParser.getWarehouseAccessoryCapacity(), Warehouse.ACCESSORY_WAREHOUSE_NAME);
-        bodyWarehouse = new Warehouse<>(configParser.getWarehouseAccessoryCapacity(), Warehouse.BODY_WAREHOUSE_NAME);
-        motorWarehouse = new Warehouse<>(configParser.getWarehouseAccessoryCapacity(), Warehouse.MOTOR_WAREHOUSE_NAME);
-        autoWarehouse = new Warehouse<>(configParser.getWarehouseAccessoryCapacity(), Warehouse.AUTO_WAREHOUSE_NAME);
+        accessoryWarehouse = new Warehouse<>(configParser.getWarehouseAccessoryCapacity(),
+                Warehouse.ACCESSORY_WAREHOUSE_NAME);
+        bodyWarehouse = new Warehouse<>(configParser.getWarehouseAccessoryCapacity(),
+                Warehouse.BODY_WAREHOUSE_NAME);
+        motorWarehouse = new Warehouse<>(configParser.getWarehouseAccessoryCapacity(),
+                Warehouse.MOTOR_WAREHOUSE_NAME);
+        autoWarehouse = new Warehouse<>(configParser.getWarehouseAccessoryCapacity(),
+                Warehouse.AUTO_WAREHOUSE_NAME);
 
         log.info("Creating suppliers...");
 
@@ -111,6 +114,7 @@ public class AutoFactory {
     public void addAutoWarehouseObserver(Observer observer){
         autoWarehouse.registerObserver(observer);
     }
+
     public void setMotorSupplierDelay(int delay){
         motorSupplier.setSupplierDelay(delay);
     }
