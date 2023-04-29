@@ -31,7 +31,6 @@ public class ConfigParser {
 
         } catch (Exception e) {
             log.error(e.getMessage());
-            System.exit(1);
         }
     }
 
