@@ -1,0 +1,49 @@
+[INFO ] 2023-04-29 11:41:11.767 [main] ConfigParser - Reading config file...
+[INFO ] 2023-04-29 11:41:11.784 [main] Warehouse - Accessory warehouse was create, capacity:100
+[INFO ] 2023-04-29 11:41:11.784 [main] Warehouse - Body warehouse was create, capacity:100
+[INFO ] 2023-04-29 11:41:11.784 [main] Warehouse - Motor warehouse was create, capacity:100
+[INFO ] 2023-04-29 11:41:11.784 [main] Warehouse - Auto warehouse was create, capacity:100
+[INFO ] 2023-04-29 11:41:11.784 [main] AutoFactory - Creating suppliers...
+[INFO ] 2023-04-29 11:41:11.787 [main] Supplier - Supplier for Motor warehouse was created
+[INFO ] 2023-04-29 11:41:11.788 [main] ProductionParticipant - New delay = 10000
+[INFO ] 2023-04-29 11:41:11.788 [main] Supplier - Supplier for Body warehouse was created
+[INFO ] 2023-04-29 11:41:11.789 [main] ProductionParticipant - New delay = 10000
+[INFO ] 2023-04-29 11:41:11.789 [main] Supplier - Supplier for Accessory warehouse was created
+[INFO ] 2023-04-29 11:41:11.789 [main] ProductionParticipant - New delay = 10000
+[INFO ] 2023-04-29 11:41:11.790 [main] AutoFactory - Creating worker threadpool...
+[INFO ] 2023-04-29 11:41:11.811 [main] Worker - Worker:0 was created
+[INFO ] 2023-04-29 11:41:11.812 [main] AutoFactory - Creating dealers..
+[INFO ] 2023-04-29 11:41:11.812 [main] Dealer - Dealer was creates
+[INFO ] 2023-04-29 11:41:11.813 [main] ProductionParticipant - New delay = 5000
+[INFO ] 2023-04-29 11:41:11.813 [main] AutoFactory - Creating threads..
+[INFO ] 2023-04-29 11:41:11.813 [main] AutoFactory - Creating auto warehouse controller..
+[INFO ] 2023-04-29 11:41:11.826 [main] AutoWarehouseController - AutoWarehouseController is creating...
+[INFO ] 2023-04-29 11:41:12.185 [AWT-EventQueue-0] AutoFactory - Starting factory...
+[INFO ] 2023-04-29 11:41:12.186 [AWT-EventQueue-0] ThreadPool - Thread Thread-0 was creating
+[INFO ] 2023-04-29 11:41:12.187 [Thread-0] PooledThread - Task0 get task
+[INFO ] 2023-04-29 12:47:51.056 [main] ConfigParser - Reading config file...
+[INFO ] 2023-04-29 12:47:51.058 [main] AutoFactory - Creating warehouses...
+[INFO ] 2023-04-29 12:47:51.061 [main] Warehouse - Accessory warehouse was create, capacity:100
+[INFO ] 2023-04-29 12:47:51.061 [main] Warehouse - Body warehouse was create, capacity:100
+[INFO ] 2023-04-29 12:47:51.061 [main] Warehouse - Motor warehouse was create, capacity:100
+[INFO ] 2023-04-29 12:47:51.061 [main] Warehouse - Auto warehouse was create, capacity:100
+[INFO ] 2023-04-29 12:47:51.061 [main] AutoFactory - Creating suppliers...
+[INFO ] 2023-04-29 12:47:51.064 [main] Supplier - Supplier for Motor warehouse was created
+[INFO ] 2023-04-29 12:47:51.065 [main] ProductionParticipant - New delay = 10000
+[INFO ] 2023-04-29 12:47:51.065 [main] Supplier - Supplier for Body warehouse was created
+[INFO ] 2023-04-29 12:47:51.065 [main] ProductionParticipant - New delay = 10000
+[INFO ] 2023-04-29 12:47:51.065 [main] Supplier - Supplier for Accessory warehouse was created
+[INFO ] 2023-04-29 12:47:51.065 [main] ProductionParticipant - New delay = 10000
+[INFO ] 2023-04-29 12:47:51.066 [main] AutoFactory - Creating worker threadpool...
+[INFO ] 2023-04-29 12:47:51.072 [main] Worker - Worker:0 was created
+[INFO ] 2023-04-29 12:47:51.072 [main] AutoFactory - Creating dealers..
+[INFO ] 2023-04-29 12:47:51.072 [main] Dealer - Dealer was creates
+[INFO ] 2023-04-29 12:47:51.072 [main] ProductionParticipant - New delay = 5000
+[INFO ] 2023-04-29 12:47:51.072 [main] AutoFactory - Creating threads..
+[INFO ] 2023-04-29 12:47:51.072 [main] AutoFactory - Creating auto warehouse controller..
+[INFO ] 2023-04-29 12:47:51.073 [main] AutoWarehouseController - AutoWarehouseController is creating...
+[INFO ] 2023-04-29 12:47:51.216 [AWT-EventQueue-0] AutoFactory - Starting factory...
+[INFO ] 2023-04-29 12:47:51.217 [AWT-EventQueue-0] ThreadPool - Thread Thread-0 was creating
+[INFO ] 2023-04-29 12:47:51.217 [Thread-0] PooledThread - Task0 get task
+[INFO ] 2023-04-29 12:47:55.336 [AWT-EventQueue-0] ProductionParticipant - New delay = 16000
+[INFO ] 2023-04-29 12:47:55.951 [AWT-EventQueue-0] ProductionParticipant - New delay = 17000
