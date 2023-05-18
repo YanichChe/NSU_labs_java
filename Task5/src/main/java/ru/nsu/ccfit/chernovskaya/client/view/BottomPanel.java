@@ -3,7 +3,8 @@ package ru.nsu.ccfit.chernovskaya.client.view;
 import ru.nsu.ccfit.chernovskaya.client.Client;
 
 import javax.swing.JPanel;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import java.awt.event.FocusAdapter;
