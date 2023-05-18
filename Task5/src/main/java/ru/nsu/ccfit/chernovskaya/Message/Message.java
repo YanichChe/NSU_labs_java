@@ -1,4 +1,4 @@
-package ru.nsu.ccfit.chernovskaya.common;
+package ru.nsu.ccfit.chernovskaya.Message;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -5,8 +5,9 @@ import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 import ru.nsu.ccfit.chernovskaya.observer.ConcreteObservable;
 import ru.nsu.ccfit.chernovskaya.server.ConfigParser;
-import ru.nsu.ccfit.chernovskaya.common.Message;
+import ru.nsu.ccfit.chernovskaya.Message.Message;
 
+import java.io.Closeable;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -19,7 +20,7 @@ import java.util.Objects;
 /**Клиентская сторона приложения.*/
 @Getter
 @Log4j2
-public class Client extends ConcreteObservable implements Runnable {
+public class Client extends ConcreteObservable implements Runnable, Closeable {
 
     /**Сообщение о конце сессии пользователя.*/
     public static final String SESSION_END_MESSAGE = "session end";
@@ -95,5 +96,12 @@ public class Client extends ConcreteObservable implements Runnable {
         } catch (IOException e) {
             log.error(e.getMessage());
         }
+    }
+
+    @Override
+    public void close() throws IOException {
+        outputStream.close();
+        inputStream.close();
+        socket.close();
     }
 }

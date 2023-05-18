@@ -1,7 +1,7 @@
 package ru.nsu.ccfit.chernovskaya.server;
 
 import lombok.Getter;
-import ru.nsu.ccfit.chernovskaya.common.Message;
+import ru.nsu.ccfit.chernovskaya.Message.Message;
 
 import java.io.Serializable;
 import java.util.ArrayList;

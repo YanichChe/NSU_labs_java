@@ -13,4 +13,4 @@
  * @author ychernovskaya
  * @version 1.1
  */
-package ru.nsu.ccfit.chernovskaya.common;
+package ru.nsu.ccfit.chernovskaya.Message;

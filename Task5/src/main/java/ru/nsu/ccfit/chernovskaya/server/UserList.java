@@ -1,7 +1,7 @@
 package ru.nsu.ccfit.chernovskaya.server;
 
 import lombok.extern.log4j.Log4j2;
-import ru.nsu.ccfit.chernovskaya.common.Message;
+import ru.nsu.ccfit.chernovskaya.Message.Message;
 
 import java.io.IOException;
 import java.util.ArrayList;

@@ -2,7 +2,7 @@ package ru.nsu.ccfit.chernovskaya.server;
 
 import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
-import ru.nsu.ccfit.chernovskaya.common.Message;
+import ru.nsu.ccfit.chernovskaya.Message.Message;
 import ru.nsu.ccfit.chernovskaya.server.job.Job;
 
 import java.io.IOException;
