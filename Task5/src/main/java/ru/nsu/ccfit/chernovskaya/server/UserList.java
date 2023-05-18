@@ -3,6 +3,7 @@ package ru.nsu.ccfit.chernovskaya.server;
 import lombok.extern.log4j.Log4j2;
 import ru.nsu.ccfit.chernovskaya.common.Message;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,11 +39,11 @@ public class UserList {
 
     /**
      * Удаление пользователя из списка активных пользователей.
-     * @param nickname - ник пользователя/сервера
+     * @param client клиент
      */
-    public void deleteUser(final String nickname) {
-        this.users.remove(nickname);
-        log.info(nickname + " was deleted");
+    public void deleteUser(final Client client) throws IOException {
+        this.users.remove(client.getName());
+        log.info(client.getName() + " was deleted");
     }
 
 

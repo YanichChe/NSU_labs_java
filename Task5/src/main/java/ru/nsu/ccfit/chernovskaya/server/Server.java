@@ -3,6 +3,7 @@ package ru.nsu.ccfit.chernovskaya.server;
 import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
 import ru.nsu.ccfit.chernovskaya.common.Message;
+import ru.nsu.ccfit.chernovskaya.server.job.Job;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -18,6 +19,8 @@ public class Server implements Runnable {
 
     private ServerSocket serverSocket;
     private final ConfigParser configParser;
+
+    private final Job job = new Job(this);
 
     /**
      * Конструктор создает сереврный сокет
@@ -49,8 +52,7 @@ public class Server implements Runnable {
             while (true) {
                 Socket socket = serverSocket.accept();
                 Client client = new Client(socket, this);
-                userList.addUser(client);
-                new Thread(client).start();
+                job.addUser(client);
                 log.info("Server got new user " + client.getName());
             }
         } catch (IOException e) {
@@ -62,14 +64,6 @@ public class Server implements Runnable {
                 log.error(e.getMessage());
             }
         }
-    }
-
-    /**
-     * Удаление клиента с сервера.
-     * @param client - клиент
-     */
-    public void removeClient(final Client client) {
-        userList.deleteUser(client.getName());
     }
 
     /**

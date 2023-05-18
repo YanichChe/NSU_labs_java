@@ -1,8 +1,10 @@
 package ru.nsu.ccfit.chernovskaya.server;
 
 import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 import ru.nsu.ccfit.chernovskaya.common.Message;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -10,15 +12,11 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
 import java.util.List;
-import java.util.Objects;
 
-/**
- * Класс отвечает за создание отдельных потоков
- * пользователей со стороны сервера для работы
- * приложения в многопользовательском режиме.
- */
+
 @Log4j2
-public class Client implements Runnable {
+@Getter
+public class Client {
 
     /** Кодовое сообщение для вывода списка пользователей. */
     public static final String GET_CLIENTS_LIST = "get clients list";
@@ -35,7 +33,8 @@ public class Client implements Runnable {
     private final Server server;
     private ObjectInputStream clientInStream;
     private ObjectOutputStream clientOutStream;
-    @Getter private String name;
+    private Socket socket;
+    @Setter private String name;
 
     /**
      * Конструктор внутри создает объекты класса
@@ -51,77 +50,49 @@ public class Client implements Runnable {
         try {
             clientInStream = new ObjectInputStream(socket.getInputStream());
             clientOutStream = new ObjectOutputStream(socket.getOutputStream());
-            socket.setSoTimeout(MAX_TIME_WAIT);
+            this.socket = socket;
+            this.socket.setSoTimeout(MAX_TIME_WAIT);
         } catch (IOException e) {
             log.error(e.getMessage());
         }
         getClientName();
     }
 
+
     /**
-     * При регистрации нового пользователя в чат
-     * всем пользователям отпрвляется сообщение, уведомляющее
-     * о входе нового участника и о новом количестве участников чата.
+     * Синхронное чтение сообщения с сокета.
+     * При получении сообщения устанавливается значение
+     * name, которое считывается из структуры сообщения.
+     * @return message сообщение, которое принял клиент.
      */
-    @Override
-    public void run() {
+    public Message receiveMessage() {
+        Message message;
         try {
-            sendChatHistory();
-            server.sendMessageToAll(new Message(
-                    SERVER_NICKNAME, "New client connected "));
-            server.sendMessageToAll(new Message(
-                    SERVER_NICKNAME, "Now connected "
-                            + server.getUserList().getClientsList().size()
-                            + " users"));
-
-            long start = System.currentTimeMillis();
-            while (true) {
-                Message message;
-                try {
-                    message = (Message) clientInStream.readObject();
-                    this.name = message.getNickname();
-                } catch (SocketException | SocketTimeoutException e) {
-                    message = null;
-                }
-
-                if (message != null) {
-
-                    if (Objects.equals(message.getMessage(), "session end")) {
-                        break;
-                    }
-                    if (Objects.equals(message.getMessage(),
-                            GET_CLIENTS_LIST)) {
-                        sendClientsList();
-                        continue;
-                    }
-
-                    server.getChatHistory().addMessage(message);
-                    start = System.currentTimeMillis();
-                    server.sendMessageToAll(message);
-                }
-
-                long timeout = server.getConfigParser().getTimeout() * MILL_SEC;
-                if (System.currentTimeMillis() - start > timeout) {
-                    server.sendMessageToAll(new Message(SERVER_NICKNAME, name
-                            + " was disconnected for inactivity"));
-                    sendMessage(new Message(SERVER_NICKNAME, "session end"));
-                    break;
-                }
+            synchronized (clientInStream) {
+                message = (Message) clientInStream.readObject();
+                this.name = message.getNickname();
             }
-            server.removeClient(this);
-        } catch (IOException | ClassNotFoundException e) {
-            log.error(e.getMessage());
+        } catch (SocketException | SocketTimeoutException
+                | ClassNotFoundException e) {
+            message = null;
+        } catch (IOException e) {
+            message = null;
         }
+
+        return message;
     }
 
     /**
-     * Функция записывает параметр message в ObjectOutputStream clientOutStream
+     * Функция записывает параметр message в ObjectOutputStream clientOutStream.
      * @param message - входящие сообщение от пользователя/сервера
      */
     public void sendMessage(final Message message) {
         try {
-            clientOutStream.writeObject(message);
-            clientOutStream.flush();
+            synchronized (clientOutStream) {
+                clientOutStream.writeObject(message);
+                clientOutStream.flush();
+            }
+
         } catch (IOException e) {
             log.error(e.getMessage());
         }
@@ -155,11 +126,11 @@ public class Client implements Runnable {
         while (name == null) {
             try {
                 name = ((Message) clientInStream.readObject()).getNickname();
-            } catch (IOException | ClassNotFoundException ignored) {}
+            } catch (IOException | ClassNotFoundException ignored) { }
             this.name = name;
         }
     }
-    /** Функция выводи список всех текущих пользователей. */
+    /** Функция выводит список всех текущих пользователей. */
     public void sendClientsList() {
         sendMessage(new Message(SERVER_NICKNAME, "\n"));
         sendMessage(new Message(SERVER_NICKNAME, "Online Users"));
