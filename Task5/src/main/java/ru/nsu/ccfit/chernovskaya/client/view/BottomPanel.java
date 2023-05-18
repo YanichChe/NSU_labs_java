@@ -5,7 +5,6 @@ import ru.nsu.ccfit.chernovskaya.client.Client;
 
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import java.awt.event.FocusAdapter;
@@ -36,8 +35,6 @@ public class BottomPanel extends JPanel {
         JTextField messageTextField = new JTextField(TEXT_FIELD_NAME);
         this.add(messageTextField, BorderLayout.CENTER);
 
-        messageTextField.setForeground(Color.BLACK);
-        messageTextField.setBackground(Color.RED);
         messageTextField.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(final FocusEvent e) {
