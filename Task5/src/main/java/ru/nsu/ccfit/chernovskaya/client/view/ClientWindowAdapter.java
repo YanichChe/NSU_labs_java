@@ -27,16 +27,10 @@ public class ClientWindowAdapter extends WindowAdapter {
         try {
             client.sendMessage(client.getNickname() + " exited the chat");
             client.sendMessage(END_MESSAGE);
-            closeAll();
+            client.close();
 
         } catch (IOException exception) {
             log.error(exception.getMessage());
         }
-    }
-
-    private void closeAll() throws IOException {
-        client.getOutputStream().close();
-        client.getInputStream().close();
-        client.getSocket().close();
     }
 }
