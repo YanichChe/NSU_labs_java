@@ -1,11 +1,8 @@
 package ru.nsu.ccfit.chernovskaya.Message;
 
 import lombok.Getter;
-import lombok.Setter;
 
 import java.io.Serializable;
-import java.sql.Time;
-import java.util.Date;
 
 /**
  * Класс использующийся для сериализации/десериализации
@@ -13,23 +10,30 @@ import java.util.Date;
  */
 @Getter
 public class Message implements Serializable {
-    private final String nickname;
-    private final String message;
-    @Setter private String[] users;
-    private final Date time;
 
-    public Message(final String nickname, final String message) {
+
+
+    public enum Type { REQUEST, ANSWER, EVENT }
+
+    public enum SubType { LOGIN, USER_LIST, NEW_MESSAGE,
+                          LOGOUT, SUCCESS, ERROR }
+
+    private final Type type;
+    private final SubType subType;
+    private final String nickname;
+    private String message;
+
+    public Message(Type type, SubType subType, String nickname, String message) {
+        this.type = type;
+        this.subType = subType;
         this.nickname = nickname;
         this.message = message;
-        this.time = java.util.Calendar.getInstance().getTime();
     }
 
-    /**
-     * @return время отправки сообщений.
-     */
-    public String getDate() {
-        Time tm = new Time(this.time.getTime());
-        return tm.toString();
+    public Message(Type type, SubType subType, String nickname){
+        this.type = type;
+        this.subType = subType;
+        this.nickname = nickname;
     }
 }
 

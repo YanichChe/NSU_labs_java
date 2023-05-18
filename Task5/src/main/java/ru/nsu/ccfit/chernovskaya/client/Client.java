@@ -22,9 +22,6 @@ import java.util.Objects;
 @Log4j2
 public class Client extends ConcreteObservable implements Runnable, Closeable {
 
-    /**Сообщение о конце сессии пользователя.*/
-    public static final String SESSION_END_MESSAGE = "session end";
-
     /** Название хоста сервера, к которому подключается пользователь.*/
     public static final String HOST = "localhost";
 
@@ -34,7 +31,7 @@ public class Client extends ConcreteObservable implements Runnable, Closeable {
 
     @Setter private String nickname;
 
-    private final List<String> chat = new ArrayList<>();
+    private final List<Message> chat = new ArrayList<>();
 
     /**
      * Конструктор создает сокет со стороны клиенты,
@@ -66,15 +63,13 @@ public class Client extends ConcreteObservable implements Runnable, Closeable {
         while (true) {
             try {
                 Message message = (Message) inputStream.readObject();
-                if (Objects.equals(message.getMessage(), SESSION_END_MESSAGE)) {
-                    getOutputStream().close();
-                    getInputStream().close();
-                    getSocket().close();
+                if (Objects.equals(message.getSubType(), Message.SubType.LOGOUT)) {
+                    close();
                     notifyObservers();
                     log.info(nickname + "session end");
                     break;
                 } else {
-                    chat.add(message.getMessage());
+                    chat.add(message);
                     notifyObservers();
                 }
             } catch (SocketException e) {
@@ -89,9 +84,9 @@ public class Client extends ConcreteObservable implements Runnable, Closeable {
      * Отправка сообщения в чат.
      * @param message сообщение введенное пользователем.
      */
-    public void sendMessage(final String message) {
+    public void sendMessage(final Message message) {
         try {
-            outputStream.writeObject(new Message(nickname, message));
+            outputStream.writeObject(message);
             outputStream.flush();
         } catch (IOException e) {
             log.error(e.getMessage());

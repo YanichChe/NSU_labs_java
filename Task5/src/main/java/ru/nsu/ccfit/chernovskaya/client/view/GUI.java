@@ -1,6 +1,6 @@
 package ru.nsu.ccfit.chernovskaya.client.view;
 
-import lombok.Getter;
+import ru.nsu.ccfit.chernovskaya.Message.Message;
 import ru.nsu.ccfit.chernovskaya.client.Client;
 import ru.nsu.ccfit.chernovskaya.observer.Observer;
 
@@ -13,9 +13,7 @@ public class GUI extends JFrame implements Observer {
     /** Размер окна. */
     public static final int SIZE = 400;
 
-    private final Menu menu;
     private final BottomPanel bottomPanel;
-    private final ChatPane chatPane;
     private final JMenuBar menuBar;
     private final Client client;
 
@@ -25,11 +23,11 @@ public class GUI extends JFrame implements Observer {
 
         String nickname = inputNickname();
         client.setNickname(nickname);
-        client.sendMessage(nickname);
+        client.sendMessage(new Message(Message.Type.REQUEST, Message.SubType.LOGIN, nickname));
 
-        chatPane = new ChatPane(client);
+        ChatPane chatPane = new ChatPane(client);
         bottomPanel = new BottomPanel(client);
-        menu = new Menu(client);
+        Menu menu = new Menu(client);
         menuBar = new JMenuBar();
 
         JScrollPane scrollPane = new JScrollPane(chatPane);
@@ -49,7 +47,9 @@ public class GUI extends JFrame implements Observer {
     }
 
     private String inputNickname() {
-        return JOptionPane.showInputDialog(INPUT_DIALOG_TEXT);
+        String nickname = JOptionPane.showInputDialog(INPUT_DIALOG_TEXT);
+        if (nickname.equals(""))  inputNickname();
+        return nickname;
     }
 
     private void addAll(final Client client) {

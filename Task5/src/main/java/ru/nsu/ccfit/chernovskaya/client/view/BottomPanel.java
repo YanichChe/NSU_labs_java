@@ -1,5 +1,6 @@
 package ru.nsu.ccfit.chernovskaya.client.view;
 
+import ru.nsu.ccfit.chernovskaya.Message.Message;
 import ru.nsu.ccfit.chernovskaya.client.Client;
 
 import javax.swing.JPanel;
@@ -63,9 +64,9 @@ public class BottomPanel extends JPanel {
     }
     private void sendMessage(final Client client,
                              final JTextField messageTextField) {
-        String message = client.getNickname()
-                + ": " + messageTextField.getText();
-        client.sendMessage(message);
+
+        client.sendMessage(new Message(Message.Type.REQUEST, Message.SubType.NEW_MESSAGE,
+                           client.getNickname(), messageTextField.getText()));
         messageTextField.setText("");
         messageTextField.grabFocus();
     }

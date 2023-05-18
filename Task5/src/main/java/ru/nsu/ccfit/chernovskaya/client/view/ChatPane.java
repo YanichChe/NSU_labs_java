@@ -1,6 +1,7 @@
 package ru.nsu.ccfit.chernovskaya.client.view;
 
 import lombok.extern.log4j.Log4j2;
+import ru.nsu.ccfit.chernovskaya.Message.Message;
 import ru.nsu.ccfit.chernovskaya.client.Client;
 import ru.nsu.ccfit.chernovskaya.observer.Observer;
 
@@ -11,6 +12,8 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.BadLocationException;
 import java.awt.Color;
 import java.util.ArrayList;
+
+import static ru.nsu.ccfit.chernovskaya.server.Client.SERVER_NICKNAME;
 
 @Log4j2
 public class ChatPane extends JTextPane implements Observer {
@@ -66,22 +69,21 @@ public class ChatPane extends JTextPane implements Observer {
      */
     @Override
     public void update() {
-        String message = client.getChat()
-                .get(client.getChat().size() - 1) + "\n";
-        String nickname = client.getNickname() + ": ";
+        Message message = client.getChat().get(client.getChat().size() - 1);
+        String nickname = client.getNickname();
         try {
-            if (!message.contains(":")) {
+            if (message.getNickname().equals(SERVER_NICKNAME)) {
                 doc.setParagraphAttributes(doc.getLength(),
                         1, center, false);
-                doc.insertString(doc.getLength(), message, center);
+                doc.insertString(doc.getLength(), message.getMessage() + '\n', center);
             } else {
-                if (message.contains(nickname)) {
-                    message = message.replace(nickname, "");
+                if (message.getNickname().equals(nickname)) {
                     doc.setParagraphAttributes(doc.getLength(),
                             1, right, false);
                     printMessage(message, right);
 
                 } else {
+                    doc.insertString(doc.getLength(), message.getNickname() + ": ", left);
                     doc.setParagraphAttributes(doc.getLength(),
                             1, left, false);
                     printMessage(message, left);
@@ -93,8 +95,8 @@ public class ChatPane extends JTextPane implements Observer {
 
     }
 
-    private ArrayList<String> parseMessage(final String message) {
-        String[] arrWords = message.split(" ");
+    private ArrayList<String> parseMessage(final Message message) {
+        String[] arrWords = message.getMessage().split(" ");
         ArrayList<String> arrPhrases = new ArrayList<>();
 
         StringBuilder stringBuffer = new StringBuilder();
@@ -130,7 +132,7 @@ public class ChatPane extends JTextPane implements Observer {
         return arrPhrases;
     }
 
-    private void printMessage(final String message,
+    private void printMessage(final Message message,
                               final SimpleAttributeSet location)
             throws BadLocationException {
 

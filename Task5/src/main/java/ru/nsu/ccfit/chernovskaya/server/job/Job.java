@@ -10,7 +10,6 @@ import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import static ru.nsu.ccfit.chernovskaya.server.Client.GET_CLIENTS_LIST;
 import static ru.nsu.ccfit.chernovskaya.server.Client.SERVER_NICKNAME;
 
 @Log4j2
@@ -44,9 +43,9 @@ public class Job {
 
             server.getUserList().addUser(client);
             client.sendChatHistory();
-            server.sendMessageToAll(new Message(
+            server.sendMessageToAll(new Message(Message.Type.REQUEST, Message.SubType.NEW_MESSAGE,
                     SERVER_NICKNAME, "New user connected "));
-            server.sendMessageToAll(new Message(
+            server.sendMessageToAll(new Message(Message.Type.REQUEST, Message.SubType.NEW_MESSAGE,
                     SERVER_NICKNAME, "Now connected "
                     + server.getUserList().getClientsList().size()
                     + " users"));
@@ -72,14 +71,13 @@ public class Job {
 
             if (message != null) {
 
-                if (Objects.equals(message.getMessage(), "session end")) {
+                if (Objects.equals(message.getSubType(), Message.SubType.LOGOUT)) {
                     try {
                         server.getUserList().deleteUser(client);
                     } catch (IOException e) {
                         log.error(e.getMessage());
                     }
-                } else if (Objects.equals(message.getMessage(),
-                        GET_CLIENTS_LIST)) {
+                } else if (Objects.equals(message.getSubType(), Message.SubType.USER_LIST)) {
                     client.sendClientsList();
                 } else {
                     server.getChatHistory().addMessage(message);

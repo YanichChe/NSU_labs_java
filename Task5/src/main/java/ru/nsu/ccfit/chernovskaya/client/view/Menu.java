@@ -1,6 +1,7 @@
 package ru.nsu.ccfit.chernovskaya.client.view;
 
 import lombok.extern.log4j.Log4j2;
+import ru.nsu.ccfit.chernovskaya.Message.Message;
 import ru.nsu.ccfit.chernovskaya.client.Client;
 
 import javax.imageio.ImageIO;
@@ -43,9 +44,8 @@ public class Menu extends JMenu {
         this.setBackground(BACKGROUND_COLOR);
         assert getClientsList != null;
         getClientsList.addActionListener(
-                e -> client.sendMessage(
-                        ru.nsu.ccfit.chernovskaya.server.
-                                Client.GET_CLIENTS_LIST));
+                e -> client.sendMessage(new Message(Message.Type.REQUEST,
+                        Message.SubType.USER_LIST, client.getNickname())));
 
     }
 }

@@ -132,10 +132,15 @@ public class Client {
     }
     /** Функция выводит список всех текущих пользователей. */
     public void sendClientsList() {
-        sendMessage(new Message(SERVER_NICKNAME, "\n"));
-        sendMessage(new Message(SERVER_NICKNAME, "Online Users"));
-        sendMessage(new Message(SERVER_NICKNAME, "-----------------"));
-        sendMessage(new Message(SERVER_NICKNAME, name));
-        sendMessage(new Message(SERVER_NICKNAME, "-----------------\n"));
+        sendMessage(new Message(Message.Type.REQUEST, Message.SubType.NEW_MESSAGE,
+                SERVER_NICKNAME, "\n"));
+        sendMessage(new Message(Message.Type.REQUEST, Message.SubType.NEW_MESSAGE,
+                SERVER_NICKNAME, "Online Users"));
+        sendMessage(new Message(Message.Type.REQUEST, Message.SubType.NEW_MESSAGE,
+                SERVER_NICKNAME, "-----------------"));
+        sendMessage(new Message(Message.Type.REQUEST, Message.SubType.NEW_MESSAGE,
+                SERVER_NICKNAME, name));
+        sendMessage(new Message(Message.Type.REQUEST, Message.SubType.NEW_MESSAGE,
+                SERVER_NICKNAME, "-----------------\n"));
     }
 }
