@@ -18,9 +18,6 @@ import java.util.List;
 @Getter
 public class Client {
 
-    /** Кодовое сообщение для вывода списка пользователей. */
-    public static final String GET_CLIENTS_LIST = "get clients list";
-
     /** Название сервера. */
     public static final String SERVER_NICKNAME = "Server";
 

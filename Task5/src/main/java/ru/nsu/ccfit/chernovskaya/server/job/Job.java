@@ -15,7 +15,7 @@ import static ru.nsu.ccfit.chernovskaya.server.Client.SERVER_NICKNAME;
 @Log4j2
 public class Job {
 
-    private static final int CLIENT_COUNT = 12;
+    private static final int CLIENT_COUNT = 2;
     private final ExecutorService clientHandlers =
             Executors.newFixedThreadPool(CLIENT_COUNT);
 

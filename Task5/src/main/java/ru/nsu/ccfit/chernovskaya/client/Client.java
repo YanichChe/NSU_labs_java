@@ -22,37 +22,30 @@ import java.util.Objects;
 @Log4j2
 public class Client extends ConcreteObservable implements Runnable, Closeable {
 
-    /** Название хоста сервера, к которому подключается пользователь.*/
-    public static final String HOST = "localhost";
-
     private Socket socket;
     private ObjectInputStream inputStream;
     private ObjectOutputStream outputStream;
 
     @Setter private String nickname;
+    @Setter private String host;
+    @Setter private int port;
 
     private final List<Message> chat = new ArrayList<>();
 
     /**
-     * Конструктор создает сокет со стороны клиенты,
+     * создает сокет со стороны клиенты,
      * создает объекты класса ObjectInputStream inputStream
      * и ObjectOutputStream outputStream. Порт для подключения
      * берется из конфигурционного файла.
      */
-    public Client() {
-        try {
-            ConfigParser configParser = new ConfigParser();
-            int port = configParser.getPort();
-            socket = new Socket(HOST, port);
-            outputStream = new ObjectOutputStream(socket.getOutputStream());
-            inputStream = new ObjectInputStream(socket.getInputStream());
-            log.info("Client was created");
-        } catch (IOException e) {
-            log.error(e.getMessage());
-        }
+    public void createSocket() throws IOException, NullPointerException{
+
+        socket = new Socket(host, port);
+        outputStream = new ObjectOutputStream(socket.getOutputStream());
+        inputStream = new ObjectInputStream(socket.getInputStream());
+        log.info("Client was created");
 
     }
-
     /**
      * Функция оожидает ввода сообщения
      * Пользователя. Если будет получено сообщение

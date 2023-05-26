@@ -1,15 +1,17 @@
 package ru.nsu.ccfit.chernovskaya.client.view;
 
+import lombok.extern.log4j.Log4j2;
 import ru.nsu.ccfit.chernovskaya.Message.Message;
 import ru.nsu.ccfit.chernovskaya.client.Client;
 import ru.nsu.ccfit.chernovskaya.observer.Observer;
 
 import javax.swing.*;
 import java.awt.BorderLayout;
+import java.io.IOException;
 
+@Log4j2
 public class GUI extends JFrame implements Observer {
-    /** Текст окна-диалога при открытии чата. */
-    public static final String INPUT_DIALOG_TEXT = "Enter your nickname";
+
     /** Размер окна. */
     public static final int SIZE = 400;
 
@@ -22,7 +24,20 @@ public class GUI extends JFrame implements Observer {
         this.client = client;
 
         String nickname = inputNickname();
+        String host = inputHost();
+        int port = inputPort();
+
+        client.setHost(host);
+        client.setPort(port);
         client.setNickname(nickname);
+        try {
+            client.createSocket();
+        }
+        catch (IOException | NullPointerException e) {
+            log.error(e.getMessage());
+            showErrorMessage();
+            System.exit(0);
+        }
         client.sendMessage(new Message(Message.Type.REQUEST, Message.SubType.LOGIN, nickname));
 
         ChatPane chatPane = new ChatPane(client);
@@ -47,9 +62,30 @@ public class GUI extends JFrame implements Observer {
     }
 
     private String inputNickname() {
-        String nickname = JOptionPane.showInputDialog(INPUT_DIALOG_TEXT);
+        String nickname = JOptionPane.showInputDialog("Input your nickname");
         if (nickname.equals(""))  inputNickname();
         return nickname;
+    }
+
+    private int inputPort() {
+        int port = 0;
+        try{
+            port = Integer.parseInt(JOptionPane.showInputDialog("Input port"));
+        } catch (NumberFormatException e){
+            inputPort();
+        }
+
+        return port;
+    }
+
+    private String inputHost(){
+        String host = JOptionPane.showInputDialog("Input host");
+        return host;
+    }
+
+    private void showErrorMessage(){
+        JOptionPane.showMessageDialog(this, "Error Server", "Error",
+                JOptionPane.ERROR_MESSAGE);
     }
 
     private void addAll(final Client client) {
