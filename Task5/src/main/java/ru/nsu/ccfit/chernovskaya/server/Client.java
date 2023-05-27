@@ -135,8 +135,12 @@ public class Client {
                 SERVER_NICKNAME, "Online Users"));
         sendMessage(new Message(Message.Type.REQUEST, Message.SubType.NEW_MESSAGE,
                 SERVER_NICKNAME, "-----------------"));
-        sendMessage(new Message(Message.Type.REQUEST, Message.SubType.NEW_MESSAGE,
-                SERVER_NICKNAME, name));
+
+        for (int i = 0; i < server.getUserList().getClientsList().size(); i++){
+            sendMessage(new Message(Message.Type.REQUEST, Message.SubType.NEW_MESSAGE,
+                    SERVER_NICKNAME, server.getUserList().getClientsList().get(i).name));
+        }
+
         sendMessage(new Message(Message.Type.REQUEST, Message.SubType.NEW_MESSAGE,
                 SERVER_NICKNAME, "-----------------\n"));
     }

@@ -74,6 +74,7 @@ public class Job {
                 if (Objects.equals(message.getSubType(), Message.SubType.LOGOUT)) {
                     try {
                         server.getUserList().deleteUser(client);
+                        log.info("server delete from user list " + client.getName());
                     } catch (IOException e) {
                         log.error(e.getMessage());
                     }

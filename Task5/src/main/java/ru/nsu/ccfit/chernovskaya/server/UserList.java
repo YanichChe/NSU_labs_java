@@ -1,5 +1,6 @@
 package ru.nsu.ccfit.chernovskaya.server;
 
+import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
 import ru.nsu.ccfit.chernovskaya.Message.Message;
 
@@ -12,7 +13,7 @@ import java.util.Map;
 @Log4j2
 public class UserList {
 
-    private final Map<String, Client> users = new HashMap<>();
+    @Getter private final Map<String, Client> users = new HashMap<>();
 
     /**
      * Функция добавляет нового пользователя на сервер.
