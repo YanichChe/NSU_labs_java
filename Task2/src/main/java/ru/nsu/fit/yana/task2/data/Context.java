@@ -1,4 +1,4 @@
-package ru.nsu.fit.yana.task2;
+package ru.nsu.fit.yana.task2.data;
 
 import java.util.Map;
 import java.util.HashMap;

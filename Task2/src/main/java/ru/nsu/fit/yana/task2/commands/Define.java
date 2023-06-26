@@ -1,7 +1,6 @@
 package ru.nsu.fit.yana.task2.commands;
 
-import ru.nsu.fit.yana.task2.Command;
-import ru.nsu.fit.yana.task2.Context;
+import ru.nsu.fit.yana.task2.data.Context;
 import ru.nsu.fit.yana.task2.exceptions.ArgumentFormatException;
 import ru.nsu.fit.yana.task2.exceptions.ArgumentsSizeException;
 

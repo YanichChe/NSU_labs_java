@@ -1,5 +1,6 @@
-package ru.nsu.fit.yana.task2;
+package ru.nsu.fit.yana.task2.commands;
 
+import ru.nsu.fit.yana.task2.data.Context;
 import ru.nsu.fit.yana.task2.exceptions.StackSizeException;
 import ru.nsu.fit.yana.task2.exceptions.UndefinedVariableException;
 

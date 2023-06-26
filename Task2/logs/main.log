@@ -5,7 +5,7 @@
 8127 [main] INFO  ru.nsu.fit.yana.task2.Main  - try to create command meow
 8127 [main] ERROR ru.nsu.fit.yana.task2.Main  - 
 ru.nsu.fit.yana.task2.exceptions.ClassCreationException: not such command
-	at ru.nsu.fit.yana.task2.CommandFactory.createCommand(CommandFactory.java:32)
+	at ru.nsu.fit.yana.task2.commands.CommandFactory.createCommand(CommandFactory.java:32)
 	at ru.nsu.fit.yana.task2.Main.main(Main.java:35)
 12486 [main] INFO  ru.nsu.fit.yana.task2.Main  - try to create command DEFINE
 12486 [main] INFO  ru.nsu.fit.yana.task2.Main  - the command was created successfully
@@ -52,7 +52,7 @@ ru.nsu.fit.yana.task2.exceptions.UndefinedVariableException: undefined variable
 41490 [main] INFO  ru.nsu.fit.yana.task2.Main  - try to create command push
 41506 [main] ERROR ru.nsu.fit.yana.task2.Main  - 
 ru.nsu.fit.yana.task2.exceptions.ClassCreationException: not such command
-	at ru.nsu.fit.yana.task2.CommandFactory.createCommand(CommandFactory.java:32)
+	at ru.nsu.fit.yana.task2.commands.CommandFactory.createCommand(CommandFactory.java:32)
 	at ru.nsu.fit.yana.task2.Main.main(Main.java:35)
 47645 [main] INFO  ru.nsu.fit.yana.task2.Main  - try to create command PUSH
 47645 [main] INFO  ru.nsu.fit.yana.task2.Main  - the command was created successfully
@@ -83,12 +83,12 @@ ru.nsu.fit.yana.task2.exceptions.NegativeNumberException: number is negative
 50943 [main] INFO  ru.nsu.fit.yana.task2.Main  - try to create command SUM
 50943 [main] ERROR ru.nsu.fit.yana.task2.Main  - 
 ru.nsu.fit.yana.task2.exceptions.ClassCreationException: not such command
-	at ru.nsu.fit.yana.task2.CommandFactory.createCommand(CommandFactory.java:32)
+	at ru.nsu.fit.yana.task2.commands.CommandFactory.createCommand(CommandFactory.java:32)
 	at ru.nsu.fit.yana.task2.Main.main(Main.java:35)
 56082 [main] INFO  ru.nsu.fit.yana.task2.Main  - try to create command SUMM
 56082 [main] ERROR ru.nsu.fit.yana.task2.Main  - 
 ru.nsu.fit.yana.task2.exceptions.ClassCreationException: not such command
-	at ru.nsu.fit.yana.task2.CommandFactory.createCommand(CommandFactory.java:32)
+	at ru.nsu.fit.yana.task2.commands.CommandFactory.createCommand(CommandFactory.java:32)
 	at ru.nsu.fit.yana.task2.Main.main(Main.java:35)
 59768 [main] INFO  ru.nsu.fit.yana.task2.Main  - try to create command +
 59768 [main] INFO  ru.nsu.fit.yana.task2.Main  - the command was created successfully
@@ -123,7 +123,7 @@ ru.nsu.fit.yana.task2.exceptions.ClassCreationException: not such command
 26468 [main] INFO  ru.nsu.fit.yana.task2.Main  - try to create command PTINT
 26468 [main] ERROR ru.nsu.fit.yana.task2.Main  - 
 ru.nsu.fit.yana.task2.exceptions.ClassCreationException: not such command
-	at ru.nsu.fit.yana.task2.CommandFactory.createCommand(CommandFactory.java:32)
+	at ru.nsu.fit.yana.task2.commands.CommandFactory.createCommand(CommandFactory.java:32)
 	at ru.nsu.fit.yana.task2.Main.main(Main.java:35)
 29358 [main] INFO  ru.nsu.fit.yana.task2.Main  - try to create command PRINT
 29358 [main] INFO  ru.nsu.fit.yana.task2.Main  - the command was created successfully
@@ -154,7 +154,7 @@ ru.nsu.fit.yana.task2.exceptions.ClassCreationException: not such command
 [INFO ] 2023-06-26 13:22:05.214 [main] Main - try to create command SUM
 [ERROR] 2023-06-26 13:22:05.215 [main] Main - 
 ru.nsu.fit.yana.task2.exceptions.ClassCreationException: not such command
-	at ru.nsu.fit.yana.task2.CommandFactory.createCommand(CommandFactory.java:24) ~[classes/:?]
+	at ru.nsu.fit.yana.task2.commands.CommandFactory.createCommand(CommandFactory.java:24) ~[classes/:?]
 	at ru.nsu.fit.yana.task2.Main.main(Main.java:28) ~[classes/:?]
 [INFO ] 2023-06-26 13:22:15.901 [main] Main - try to create command PUSH
 [INFO ] 2023-06-26 13:22:15.919 [main] Main - the command was created successfully
@@ -165,7 +165,7 @@ ru.nsu.fit.yana.task2.exceptions.ClassCreationException: not such command
 [INFO ] 2023-06-26 13:22:24.791 [main] Main - try to create command end
 [ERROR] 2023-06-26 13:22:24.791 [main] Main - 
 ru.nsu.fit.yana.task2.exceptions.ClassCreationException: not such command
-	at ru.nsu.fit.yana.task2.CommandFactory.createCommand(CommandFactory.java:24) ~[classes/:?]
+	at ru.nsu.fit.yana.task2.commands.CommandFactory.createCommand(CommandFactory.java:24) ~[classes/:?]
 	at ru.nsu.fit.yana.task2.Main.main(Main.java:28) ~[classes/:?]
 [INFO ] 2023-06-26 15:07:00.833 [main] Main - Initialize Calc application
 [INFO ] 2023-06-26 15:07:00.836 [main] Main - Parsing command line
@@ -191,3 +191,41 @@ ru.nsu.fit.yana.task2.exceptions.ClassCreationException: not such command
 [INFO ] 2023-06-26 15:13:00.809 [main] Main - Initialize Calc application
 [INFO ] 2023-06-26 15:13:00.812 [main] Main - Parsing command line
 [ERROR] 2023-06-26 15:13:00.878 [main] Main -  (Системе не удается найти указанный путь)
+[INFO ] 2023-06-26 15:45:42.990 [main] Main - Initialize Calc application
+[INFO ] 2023-06-26 15:45:42.993 [main] Main - Parsing command line
+[INFO ] 2023-06-26 15:45:43.061 [main] Main - Create context
+[INFO ] 2023-06-26 15:45:43.061 [main] Main - load Calc
+[INFO ] 2023-06-26 15:45:48.086 [main] Main - try to create command DEFINE
+[INFO ] 2023-06-26 15:45:48.116 [main] Main - the command was created successfully
+[ERROR] 2023-06-26 15:45:48.117 [main] Main - 
+ru.nsu.fit.yana.task2.exceptions.ArgumentsSizeException: Not enough elements in the argv
+	at ru.nsu.fit.yana.task2.commands.Define.load(Define.java:15) ~[classes/:?]
+	at ru.nsu.fit.yana.task2.Main.main(Main.java:54) ~[classes/:?]
+[INFO ] 2023-06-26 15:45:52.429 [main] Main - try to create command DEFINE
+[INFO ] 2023-06-26 15:45:52.429 [main] Main - the command was created successfully
+[INFO ] 2023-06-26 15:45:56.199 [main] Main - try to create command PUSH
+[INFO ] 2023-06-26 15:45:56.199 [main] Main - the command was created successfully
+[INFO ] 2023-06-26 15:45:58.999 [main] Main - try to create command SQRT
+[INFO ] 2023-06-26 15:45:58.999 [main] Main - the command was created successfully
+[INFO ] 2023-06-26 15:46:01.176 [main] Main - try to create command PRINT
+[INFO ] 2023-06-26 15:46:01.176 [main] Main - the command was created successfully
+[INFO ] 2023-06-26 15:52:36.598 [main] Main - Initialize Calc application
+[INFO ] 2023-06-26 15:52:36.601 [main] Main - Parsing command line
+[INFO ] 2023-06-26 15:52:36.660 [main] Main - Create context
+[INFO ] 2023-06-26 15:52:36.660 [main] Main - load Calc
+[INFO ] 2023-06-26 15:52:43.014 [main] Main - try to create command DEFINE
+[INFO ] 2023-06-26 15:52:43.030 [main] Main - the command was created successfully
+[INFO ] 2023-06-26 15:52:45.234 [main] Main - try to create command PUSH
+[INFO ] 2023-06-26 15:52:45.234 [main] Main - the command was created successfully
+[INFO ] 2023-06-26 15:52:46.678 [main] Main - try to create command SQRT
+[INFO ] 2023-06-26 15:52:46.678 [main] Main - the command was created successfully
+[INFO ] 2023-06-26 15:52:48.852 [main] Main - try to create command PWINT
+[ERROR] 2023-06-26 15:52:48.852 [main] Main - 
+java.lang.IllegalArgumentException: No enum constant ru.nsu.fit.yana.task2.commands.CommandType.PWINT
+	at java.lang.Enum.valueOf(Enum.java:274) ~[?:?]
+	at ru.nsu.fit.yana.task2.commands.CommandType.valueOf(CommandType.java:3) ~[classes/:?]
+	at ru.nsu.fit.yana.task2.commands.CommandFactory.createCommand(CommandFactory.java:28) ~[classes/:?]
+	at ru.nsu.fit.yana.task2.Main.start(Main.java:50) ~[classes/:?]
+	at ru.nsu.fit.yana.task2.Main.main(Main.java:38) ~[classes/:?]
+[INFO ] 2023-06-26 15:53:00.551 [main] Main - try to create command PRINT
+[INFO ] 2023-06-26 15:53:00.551 [main] Main - the command was created successfully
