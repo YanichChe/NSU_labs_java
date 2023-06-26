@@ -145,3 +145,25 @@ ru.nsu.fit.yana.task2.exceptions.ClassCreationException: not such command
 0 [main] INFO  ru.nsu.fit.yana.task2.Main  - Parsing command line
 15 [main] INFO  ru.nsu.fit.yana.task2.Main  - Create context
 15 [main] INFO  ru.nsu.fit.yana.task2.Main  - load Calc
+[INFO ] 2023-06-26 13:21:56.210 [main] Main - Initialize Calc application
+[INFO ] 2023-06-26 13:21:56.215 [main] Main - Parsing command line
+[INFO ] 2023-06-26 13:21:56.230 [main] Main - Create context
+[INFO ] 2023-06-26 13:21:56.237 [main] Main - load Calc
+[INFO ] 2023-06-26 13:22:02.794 [main] Main - try to create command DEFINE
+[INFO ] 2023-06-26 13:22:02.853 [main] Main - the command was created successfully
+[INFO ] 2023-06-26 13:22:05.214 [main] Main - try to create command SUM
+[ERROR] 2023-06-26 13:22:05.215 [main] Main - 
+ru.nsu.fit.yana.task2.exceptions.ClassCreationException: not such command
+	at ru.nsu.fit.yana.task2.CommandFactory.createCommand(CommandFactory.java:24) ~[classes/:?]
+	at ru.nsu.fit.yana.task2.Main.main(Main.java:28) ~[classes/:?]
+[INFO ] 2023-06-26 13:22:15.901 [main] Main - try to create command PUSH
+[INFO ] 2023-06-26 13:22:15.919 [main] Main - the command was created successfully
+[INFO ] 2023-06-26 13:22:18.984 [main] Main - try to create command SQRT
+[INFO ] 2023-06-26 13:22:19.000 [main] Main - the command was created successfully
+[INFO ] 2023-06-26 13:22:21.994 [main] Main - try to create command PRINT
+[INFO ] 2023-06-26 13:22:22.010 [main] Main - the command was created successfully
+[INFO ] 2023-06-26 13:22:24.791 [main] Main - try to create command end
+[ERROR] 2023-06-26 13:22:24.791 [main] Main - 
+ru.nsu.fit.yana.task2.exceptions.ClassCreationException: not such command
+	at ru.nsu.fit.yana.task2.CommandFactory.createCommand(CommandFactory.java:24) ~[classes/:?]
+	at ru.nsu.fit.yana.task2.Main.main(Main.java:28) ~[classes/:?]

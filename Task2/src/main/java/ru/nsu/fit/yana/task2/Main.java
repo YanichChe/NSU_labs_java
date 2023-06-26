@@ -1,51 +1,42 @@
 package ru.nsu.fit.yana.task2;
 
-
-import org.apache.log4j.Logger;
+import lombok.extern.log4j.Log4j2;
 import ru.nsu.fit.yana.task2.exceptions.UndefinedFileNameException;
-
 import java.io.InputStream;
 import java.util.Scanner;
 
-public class Main
-{
-    private static final Logger LOGGER = Logger.getLogger(Main.class);
-    public static void main(String[] args) throws UndefinedFileNameException
-    {
-        LOGGER.info("Initialize Calc application");
+@Log4j2
+public class Main {
+    public static void main(String[] args) throws UndefinedFileNameException {
+        log.info("Initialize Calc application");
+        log.info("Parsing command line");
 
-        LOGGER.info("Parsing command line");
         CommandLineParser parser = new CommandLineParser(args);
         parser.parse();
 
-        LOGGER.info("Create context");
+        log.info("Create context");
         InputStream in = parser.getInputStream();
         Context ctx = new Context();
 
-        LOGGER.info("load Calc");
-        try(Scanner scanner = new Scanner(in))
-        {
-            while(scanner.hasNextLine())
-            {
-                try
-                {
-                String[] arr = scanner.nextLine().split(" ");
+        log.info("load Calc");
+        try (Scanner scanner = new Scanner(in)) {
+            while (scanner.hasNextLine()) {
+                try {
+                    String[] arr = scanner.nextLine().split(" ");
 
-                LOGGER.info("try to create command " + arr[0]);
-                Command command = CommandFactory.createCommand(arr[0]);
-                LOGGER.info("the command was created successfully");
+                    log.info("try to create command " + arr[0]);
+                    Command command = CommandFactory.createCommand(arr[0]);
+                    log.info("the command was created successfully");
 
-                command.load(arr, ctx);
+                    command.load(arr, ctx);
                 }
-                catch (Exception e)
-                {
-                    LOGGER.error("", e);
+                catch (Exception e) {
+                    log.error("", e);
                     System.err.println(e.getMessage());
 
                 }
             }
         }
-
-        LOGGER.info("END");
+        log.info("END");
     }
 }

@@ -9,33 +9,27 @@ import ru.nsu.fit.yana.task2.exceptions.UndefinedVariableException;
 import java.util.Deque;
 import java.util.Map;
 
-public class Push extends Command
-{
+public class Push extends Command {
     @Override
-    public void load(String[] args, Context ctx) throws ArgumentsSizeException, ArgumentFormatException, UndefinedVariableException
-    {
+    public void load(String[] args, Context ctx) throws ArgumentsSizeException, ArgumentFormatException, UndefinedVariableException {
         Deque<Double> stack = ctx.getStack();
         Map<String, Double> variables = ctx.getVariables();
 
-        if (args.length < 2) throw new ArgumentsSizeException();
+        if (args.length < 2)
+            throw new ArgumentsSizeException();
 
-        try
-        {
+        try {
             var actualValue = 0.0;
-            if(variables.containsKey(args[1]))
-            {
+            if (variables.containsKey(args[1])) {
                 actualValue = variables.get(args[1]);
-            }
-            else
-            {
+            } else {
                 actualValue = Double.valueOf(args[1]);
             }
 
             stack.push(actualValue);
         }
 
-        catch (NullPointerException e)
-        {
+        catch (NullPointerException e) {
             throw new UndefinedVariableException();
         }
     }

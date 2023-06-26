@@ -6,14 +6,13 @@ import ru.nsu.fit.yana.task2.Context;
 import java.util.Deque;
 import java.util.EmptyStackException;
 
-public class Sum extends Command
-{
+public class Sum extends Command {
     @Override
-    public void load(String[] args, Context ctx) throws EmptyStackException
-    {
+    public void load(String[] args, Context ctx) throws EmptyStackException {
         Deque<Double> stack = ctx.getStack();
 
-        if (stack.size() < 2) throw new EmptyStackException();
+        if (stack.size() < 2)
+            throw new EmptyStackException();
 
         Double var1 = stack.pop();
         Double var2 = stack.pop();

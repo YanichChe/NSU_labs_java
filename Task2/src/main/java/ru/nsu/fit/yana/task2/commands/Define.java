@@ -7,20 +7,17 @@ import ru.nsu.fit.yana.task2.exceptions.ArgumentsSizeException;
 
 import java.util.Map;
 
-public class Define extends Command
-{
+public class Define extends Command {
     @Override
-    public void load(String[] args, Context ctx) throws ArgumentsSizeException, NumberFormatException
-    {
+    public void load(String[] args, Context ctx) throws ArgumentsSizeException, NumberFormatException {
         Map<String, Double> variables = ctx.getVariables();
-        if (args.length != 3) throw new ArgumentsSizeException();
+        if (args.length != 3)
+            throw new ArgumentsSizeException();
 
-        try
-        {
+        try {
             variables.put(args[1], Double.valueOf(args[2]));
         }
-        catch (NumberFormatException e)
-        {
+        catch (NumberFormatException e) {
             throw new ArgumentFormatException();
         }
     }
