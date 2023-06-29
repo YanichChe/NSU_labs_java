@@ -1,76 +1,45 @@
-package ru.nsu.ccfit.chernovskaya;
+package ru.nsu.ccfit.chernovskaya.controller;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NonNull;
 import lombok.Setter;
+import ru.nsu.ccfit.chernovskaya.model.Board;
+import ru.nsu.ccfit.chernovskaya.model.Figure;
+import ru.nsu.ccfit.chernovskaya.model.Tetrominoe;
+import ru.nsu.ccfit.chernovskaya.observer.ConcreteObservable;
+import java.awt.Point;
 
-import java.awt.*;
-import java.util.Objects;
-
-import static ru.nsu.ccfit.chernovskaya.Board.BOARD_HEIGHT;
-import static ru.nsu.ccfit.chernovskaya.Board.BOARD_WIDTH;
-import static ru.nsu.ccfit.chernovskaya.Figure.FIGURE_SIZE;
+import static ru.nsu.ccfit.chernovskaya.model.Board.BOARD_HEIGHT;
+import static ru.nsu.ccfit.chernovskaya.model.Board.BOARD_WIDTH;
+import static ru.nsu.ccfit.chernovskaya.model.Figure.FIGURE_SIZE;
 
 /**
- * Class which manages board and boardDrawer
- * <p>Private fields: Board board, StatusBar statusBar<p/>
+ * Class which manages board and boardDrawer.
+ * <p>Private fields: Board board, StatusBar statusBar.<p/>
  *
  * @since java 16
  */
 @Getter
 @Setter
 @AllArgsConstructor
-public final class BoardController {
-    @NonNull private final Board board;
-    @NonNull private final StatusBar statusBar;
+public final class BoardController extends ConcreteObservable {
+    private final Board board;
 
-    public Board board() {
-        return board;
-    }
-
-    public StatusBar statusBar() {
-        return statusBar;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == this)
-            return true;
-        if (obj == null || obj.getClass() != this.getClass())
-            return false;
-        var that = (BoardController) obj;
-        return Objects.equals(this.board, that.board) && Objects.equals(this.statusBar, that.statusBar);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(board, statusBar);
-    }
-
-    @Override
-    public String toString() {
-        return "BoardController[" + "board=" + board + ", " + "statusBar=" + statusBar + ']';
-    }
-
-    private static Component component;
-
-    protected enum Rotation {
+    public enum Rotation {
         LEFT, RIGHT
     }
 
-    public void setComponent(Component component) {
-        BoardController.component = component;
-    }
-
     /**
-     * Create new instance of class Figure, set coordinates in a center top of the board.
+     * Create new instance of class Figure, set coordinates
+     * in a center top of the board.
      * If figure can't move down, method set started status as false
      */
     public void createNewFigure() {
         Figure newFigure = Figure.getRandomFigure();
-        if (!ableMove(newFigure, new Point(BOARD_WIDTH / 2, BOARD_HEIGHT - 1 + newFigure.getMinY()))) {
-            board.setStartedStatus(false);
+
+        if (!ableMove(newFigure, new Point(BOARD_WIDTH / 2,
+                BOARD_HEIGHT - 1 + newFigure.getMinY()))) {
+            board.setStarted(false);
             return;
         }
 
@@ -81,23 +50,22 @@ public final class BoardController {
     }
 
     /**
-     * Set all board's element figure "Empty"
+     * Set all board's element figure "Empty".
      */
     public void clearBoard() {
         for (int i = 0; i < BOARD_HEIGHT * BOARD_WIDTH; i++) {
-            board.setFigure(i, Figure.Tetrominoe.Empty);
+            board.setFigure(i, Tetrominoe.Empty);
         }
     }
 
-
     /**
-     * Check if figure can move to coordinate point
+     * Check if figure can move to coordinate point.
      *
-     * @param figure moving figure
-     * @param point  the coordinate to which move shape
-     * @return ability move to point
+     * @param figure moving figure.
+     * @param point  the coordinate to which move shape.
+     * @return ability move to point.
      */
-    public boolean ableMove(Figure figure, Point point) {
+    public boolean ableMove(final Figure figure, final Point point) {
         for (int i = 0; i < FIGURE_SIZE; ++i) {
             int x = point.x + figure.getCoordinate(i).x;
             int y = point.y - figure.getCoordinate(i).y;
@@ -106,7 +74,7 @@ public final class BoardController {
                 return false;
             }
 
-            if (board.getFigure(new Point(x, y)) != Figure.Tetrominoe.Empty) {
+            if (board.getFigure(new Point(x, y)) != Tetrominoe.Empty) {
                 return false;
             }
         }
@@ -115,27 +83,30 @@ public final class BoardController {
     }
 
     /**
-     * Move figure to the point, if it is possible
+     * Move figure to the point, if it is possible.
      *
-     * @param figure moving figure
-     * @param point  the coordinate to which move shape
+     * @param figure moving figure.
+     * @param point  the coordinate to which move shape.
      */
-    public void move(Figure figure, Point point) {
+    public void move(final Figure figure, final Point point) {
         board.setCurX(point.x);
         board.setCurY(point.y);
         board.setCurrentFigure(figure);
-        component.repaint();
+        notifyObservers(0);
     }
 
     /**
-     * The function rotates the shape in the specified direction. If, when the figure is rotated, the index
-     * of any square of the figure goes beyond the index of the board, then the function moves the figure
-     * so that it completely fits on the board
+     * The function rotates the shape in the specified direction.
+     * If, when the figure is rotated, the index
+     * of any square of the figure goes beyond the index of the board,
+     * then the function moves the figure
+     * so that it completely fits on the board.
      *
-     * @param rotation direction of rotation
+     * @param rotation direction of rotation.
      */
     public void rotate(Rotation rotation) {
-        if (board.getCurrentFigure().getFigureName().equals(Figure.Tetrominoe.SquareShape)) {
+        if (board.getCurrentFigure().getFigureName()
+                .equals(Tetrominoe.SquareShape)) {
             return;
         }
 
@@ -143,11 +114,13 @@ public final class BoardController {
         for (int i = 0; i < FIGURE_SIZE; i++) {
 
             if (rotation == Rotation.LEFT) {
-                result.getCoordinate(i).setLocation(board.getCurrentFigure().getCoordinate(i).getY(), -board.getCurrentFigure().getCoordinate(i).getX());
+                result.getCoordinate(i).setLocation(board.getCurrentFigure().getCoordinate(i).getY(),
+                        (-1) * board.getCurrentFigure().getCoordinate(i).getX());
             }
 
             if (rotation == Rotation.RIGHT) {
-                result.getCoordinate(i).setLocation(-board.getCurrentFigure().getCoordinate(i).getY(), board.getCurrentFigure().getCoordinate(i).getX());
+                result.getCoordinate(i).setLocation(-board.getCurrentFigure().getCoordinate(i).getY(),
+                        board.getCurrentFigure().getCoordinate(i).getX());
             }
 
         }
@@ -166,25 +139,26 @@ public final class BoardController {
             int x = board.getCurX() + result.getCoordinate(i).x;
             int y = board.getCurY() - result.getCoordinate(i).y;
 
-            if (board.getFigure(new Point(x, y)) != Figure.Tetrominoe.Empty)
+            if (board.getFigure(new Point(x, y)) != Tetrominoe.Empty)
                 return;
         }
 
         if (!ableMove(result, new Point(board.getCurX(), board.getCurY() - 1)))
             return;
+
         board.setCurrentFigure(result);
-        component.repaint();
+        notifyObservers(0);
     }
 
     /**
-     * Check all lines and if it is full delete it
+     * Check all lines and if it is full delete it.
      */
     public void removeFullLines() {
         int numFullLines = 0;
         for (int i = BOARD_HEIGHT - 1; i >= 0; --i) {
             boolean lineIsFull = true;
             for (int j = 0; j < BOARD_WIDTH; ++j) {
-                if (board.getFigure(new Point(j, i)) == Figure.Tetrominoe.Empty) {
+                if (board.getFigure(new Point(j, i)) == Tetrominoe.Empty) {
                     lineIsFull = false;
                     break;
                 }
@@ -203,13 +177,12 @@ public final class BoardController {
 
         if (numFullLines > 0) {
             board.addNumberLinesRemoved(numFullLines);
-            statusBar.setStatusBarText("Score :" + board.getNumberLinesRemoved() * BOARD_WIDTH);
-            component.repaint();
+            notifyObservers(board.getNumberLinesRemoved());
         }
     }
 
     /**
-     * Change current figure's coordinate to one line down if it is possible
+     * Change current figure's coordinate to one line down if it is possible.
      */
     public void down() {
         if (!ableMove(board.getCurrentFigure(), new Point(board.getCurX(), board.getCurY() - 1))) {
@@ -220,7 +193,7 @@ public final class BoardController {
     }
 
     /**
-     * Lower the figure as low as possible until it touches another figure
+     * Lower the figure as low as possible until it touches another figure.
      */
     public void dropDown() {
         int newY = board.getCurY();
@@ -239,8 +212,8 @@ public final class BoardController {
     }
 
     /**
-     * Handling touch with other shapes at the bottom
-     * <p>Calls a check to see if any string is now complete
+     * Handling touch with other shapes at the bottom.
+     * <p>Calls a check to see if any string is now complete.
      * Causes the creation of the following shape<p/>
      */
     public void pieceDropped() {

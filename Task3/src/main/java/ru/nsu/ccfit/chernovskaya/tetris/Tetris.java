@@ -1,4 +1,10 @@
-package ru.nsu.ccfit.chernovskaya;
+package ru.nsu.ccfit.chernovskaya.tetris;
+
+import ru.nsu.ccfit.chernovskaya.controller.BoardController;
+import ru.nsu.ccfit.chernovskaya.model.Board;
+import ru.nsu.ccfit.chernovskaya.view.BoardDrawer;
+import ru.nsu.ccfit.chernovskaya.view.FinishDialog;
+import ru.nsu.ccfit.chernovskaya.view.StatusBar;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,6 +19,7 @@ import java.util.TimerTask;
  */
 public class Tetris extends JFrame {
     public final static String gameName = "Tetris";
+
     public static final int DELAY = 100;
     public static final int PERIOD = 700;
 
@@ -26,7 +33,7 @@ public class Tetris extends JFrame {
         board = new Board();
         boardDrawer = new BoardDrawer(board);
         statusBar = new StatusBar();
-        boardController = new BoardController(board, statusBar);
+        boardController = new BoardController(board);
         timer = new Timer();
 
         init();
@@ -34,12 +41,13 @@ public class Tetris extends JFrame {
     }
 
     public void init() {
+        boardController.addObserver(boardDrawer);
+        boardController.addObserver(statusBar);
         boardDrawer.setFocusable(true);
         boardDrawer.addKeyListener(new TetrisKeyAdapter());
 
         add(statusBar, BorderLayout.NORTH);
         add(boardDrawer);
-        boardController.setComponent(boardDrawer);
 
         setTitle(gameName);
         setSize(400, 600);
@@ -53,7 +61,7 @@ public class Tetris extends JFrame {
 
     public void start() {
         timer.scheduleAtFixedRate(new CurrentTask(), DELAY, PERIOD);
-        board.setStartedStatus(true);
+        board.setStarted(true);
         boardController.clearBoard();
         boardController.createNewFigure();
     }

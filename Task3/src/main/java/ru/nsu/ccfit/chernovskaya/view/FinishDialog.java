@@ -1,4 +1,6 @@
-package ru.nsu.ccfit.chernovskaya;
+package ru.nsu.ccfit.chernovskaya.view;
+
+import ru.nsu.ccfit.chernovskaya.tetris.Tetris;
 
 import javax.swing.*;
 

@@ -1,5 +1,7 @@
 package ru.nsu.ccfit.chernovskaya;
 
+import ru.nsu.ccfit.chernovskaya.view.StartMenu;
+
 import java.awt.*;
 
 public class Main {

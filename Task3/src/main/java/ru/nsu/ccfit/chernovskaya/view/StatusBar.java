@@ -1,4 +1,6 @@
-package ru.nsu.ccfit.chernovskaya;
+package ru.nsu.ccfit.chernovskaya.view;
+
+import ru.nsu.ccfit.chernovskaya.observer.Observer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -6,7 +8,7 @@ import java.awt.*;
 /**
  * Status bar, displays the number of points received for this game
  */
-public class StatusBar extends JPanel {
+public class StatusBar extends JPanel implements Observer {
 
     private final JLabel score;
     public StatusBar() {
@@ -19,5 +21,10 @@ public class StatusBar extends JPanel {
 
     public void setStatusBarText(String text){
         score.setText(text);
+    }
+
+    @Override
+    public void update(int data) {
+        setStatusBarText("Score: " + data);
     }
 }

@@ -1,4 +1,4 @@
-package ru.nsu.ccfit.chernovskaya;
+package ru.nsu.ccfit.chernovskaya.view;
 
 import javax.swing.*;
 import java.awt.*;
