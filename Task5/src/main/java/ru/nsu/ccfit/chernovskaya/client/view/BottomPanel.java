@@ -1,6 +1,6 @@
 package ru.nsu.ccfit.chernovskaya.client.view;
 
-import ru.nsu.ccfit.chernovskaya.Message.Message;
+import ru.nsu.ccfit.chernovskaya.message.Message;
 import ru.nsu.ccfit.chernovskaya.client.Client;
 
 import javax.swing.JPanel;

@@ -2,14 +2,14 @@ package ru.nsu.ccfit.chernovskaya.client.view;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import ru.nsu.ccfit.chernovskaya.Message.Message;
+import ru.nsu.ccfit.chernovskaya.message.Message;
 import ru.nsu.ccfit.chernovskaya.client.Client;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 
-import static ru.nsu.ccfit.chernovskaya.server.Client.SERVER_NICKNAME;
+import static ru.nsu.ccfit.chernovskaya.server.Server.SERVER_NICKNAME;
 
 @Log4j2
 @AllArgsConstructor

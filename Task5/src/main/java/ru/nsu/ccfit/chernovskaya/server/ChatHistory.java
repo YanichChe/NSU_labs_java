@@ -1,7 +1,8 @@
 package ru.nsu.ccfit.chernovskaya.server;
 
 import lombok.Getter;
-import ru.nsu.ccfit.chernovskaya.Message.Message;
+import lombok.NonNull;
+import ru.nsu.ccfit.chernovskaya.message.Message;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import java.util.List;
  * истории хранится в конфигурционном файле
  * configuration.properties (ChatHistoryCount)
  */
-public class ChatHistory implements Serializable {
+public class ChatHistory{
 
     @Getter private final List<Message> history;
     private final ConfigParser configParser;
@@ -24,8 +25,8 @@ public class ChatHistory implements Serializable {
      * configuration.properties (ChatHistoryCount)
      * и объект класса ConfigParser configParser.
      */
-    public ChatHistory() {
-        configParser = new ConfigParser();
+    public ChatHistory(@NonNull final  ConfigParser configParser) {
+        this.configParser = configParser;
         this.history = new ArrayList<>(configParser.getChatHistoryCount());
     }
 
@@ -37,12 +38,11 @@ public class ChatHistory implements Serializable {
      * добавляет новое(message)
      * @param message - новое сообщение пользователя/сервера.
      */
-    public void addMessage(final Message message) {
+    public void addMessage(@NonNull final Message message) {
         if (this.history.size() > configParser.getChatHistoryCount()) {
             this.history.remove(0);
         }
 
         this.history.add(message);
     }
-
 }

@@ -1,9 +1,9 @@
 package ru.nsu.ccfit.chernovskaya.client.view;
 
 import lombok.extern.log4j.Log4j2;
-import ru.nsu.ccfit.chernovskaya.Message.Message;
+import ru.nsu.ccfit.chernovskaya.message.Message;
 import ru.nsu.ccfit.chernovskaya.client.Client;
-import ru.nsu.ccfit.chernovskaya.observer.Observer;
+import ru.nsu.ccfit.chernovskaya.client.observer.Observer;
 
 import javax.swing.*;
 import java.awt.BorderLayout;

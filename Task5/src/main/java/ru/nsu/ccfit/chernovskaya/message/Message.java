@@ -1,19 +1,13 @@
-package ru.nsu.ccfit.chernovskaya.Message;
+package ru.nsu.ccfit.chernovskaya.message;
 
 import lombok.Getter;
 
 import java.io.Serializable;
 
-/**
- * Класс использующийся для сериализации/десериализации
- * сообщений.
- */
 @Getter
-public class Message implements Serializable {
+public class Message{
 
-
-
-    public enum Type { REQUEST, ANSWER, EVENT }
+    public enum Type { REQUEST, RESPONSE, EVENT }
 
     public enum SubType { LOGIN, USER_LIST, NEW_MESSAGE,
                           LOGOUT, SUCCESS, ERROR }
@@ -35,6 +29,10 @@ public class Message implements Serializable {
         this.subType = subType;
         this.nickname = nickname;
     }
+
+    public void read(){}
+
+    public void write(){}
 }
 
 

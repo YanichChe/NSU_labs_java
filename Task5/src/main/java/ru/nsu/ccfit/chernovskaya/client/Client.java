@@ -1,11 +1,11 @@
 package ru.nsu.ccfit.chernovskaya.client;
 
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
-import ru.nsu.ccfit.chernovskaya.observer.ConcreteObservable;
-import ru.nsu.ccfit.chernovskaya.server.ConfigParser;
-import ru.nsu.ccfit.chernovskaya.Message.Message;
+import ru.nsu.ccfit.chernovskaya.client.observer.ConcreteObservable;
+import ru.nsu.ccfit.chernovskaya.message.Message;
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -77,7 +77,7 @@ public class Client extends ConcreteObservable implements Runnable, Closeable {
      * Отправка сообщения в чат.
      * @param message сообщение введенное пользователем.
      */
-    public void sendMessage(final Message message) {
+    public void sendMessage(@NonNull final Message message) {
         try {
             outputStream.writeObject(message);
             outputStream.flush();

@@ -1,9 +1,10 @@
 package ru.nsu.ccfit.chernovskaya.server;
 
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
-import ru.nsu.ccfit.chernovskaya.Message.Message;
+import ru.nsu.ccfit.chernovskaya.message.Message;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -18,30 +19,29 @@ import java.util.List;
 @Getter
 public class Client {
 
-    /** Название сервера. */
-    public static final String SERVER_NICKNAME = "Server";
-
-    /** Максимальное ожидание чтения из сокета.*/
+    /**
+     * Максимальное ожидание чтения из сокета.
+     */
     public static final int MAX_TIME_WAIT = 1000;
 
-    /** Перевод из секунд в милисекунды.*/
-    public static final long MILL_SEC = 1000L;
-
     private final Server server;
+    private Socket socket;
+    @Setter
+    private String name;
+
     private ObjectInputStream clientInStream;
     private ObjectOutputStream clientOutStream;
-    private Socket socket;
-    @Setter private String name;
 
     /**
      * Конструктор внутри создает объекты класса
      * ObjectInputStream clientInStream
      * и ObjectOutputStream clientOutStream. Устанавливает значение
      * Timeout для сокета.
+     *
      * @param socket - сокет создающийся при подключении к серверу
      * @param server - сервер,к которому осуществляется подключение
      */
-    public Client(final Socket socket, final Server server) {
+    public Client(@NonNull final Socket socket, @NonNull final Server server) {
         this.server = server;
 
         try {
@@ -49,7 +49,8 @@ public class Client {
             clientOutStream = new ObjectOutputStream(socket.getOutputStream());
             this.socket = socket;
             this.socket.setSoTimeout(MAX_TIME_WAIT);
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             log.error(e.getMessage());
         }
         getClientName();
@@ -60,19 +61,16 @@ public class Client {
      * Синхронное чтение сообщения с сокета.
      * При получении сообщения устанавливается значение
      * name, которое считывается из структуры сообщения.
+     *
      * @return message сообщение, которое принял клиент.
      */
-    public Message receiveMessage() {
+    public synchronized Message receiveMessage() {
         Message message;
         try {
-            synchronized (clientInStream) {
-                message = (Message) clientInStream.readObject();
-                this.name = message.getNickname();
-            }
-        } catch (SocketException | SocketTimeoutException
-                | ClassNotFoundException e) {
-            message = null;
-        } catch (IOException e) {
+            message = (Message) clientInStream.readObject();
+            this.name = message.getNickname();
+        }
+        catch (ClassNotFoundException | IOException e) {
             message = null;
         }
 
@@ -81,16 +79,15 @@ public class Client {
 
     /**
      * Функция записывает параметр message в ObjectOutputStream clientOutStream.
+     *
      * @param message - входящие сообщение от пользователя/сервера
      */
-    public void sendMessage(final Message message) {
+    public synchronized void sendMessage(@NonNull final Message message) {
         try {
-            synchronized (clientOutStream) {
-                clientOutStream.writeObject(message);
-                clientOutStream.flush();
-            }
-
-        } catch (IOException e) {
+            clientOutStream.writeObject(message);
+            clientOutStream.flush();
+        }
+        catch (IOException e) {
             log.error(e.getMessage());
         }
     }
@@ -104,18 +101,11 @@ public class Client {
     public void sendChatHistory() {
         int size = server.getChatHistory().getHistory().size();
         List<Message> chat = server.getChatHistory().getHistory();
-        int chatHistoryCount = server.getConfigParser().getChatHistoryCount();
 
-        if (size < chatHistoryCount) {
-            for (Message message : chat) {
-                sendMessage(message);
-            }
-        } else {
-            for (Message message
-                    : chat.subList(size - chatHistoryCount, size)) {
-                sendMessage(message);
-            }
+        for (Message message : chat) {
+            sendMessage(message);
         }
+
     }
 
     private void getClientName() {
@@ -123,25 +113,10 @@ public class Client {
         while (name == null) {
             try {
                 name = ((Message) clientInStream.readObject()).getNickname();
-            } catch (IOException | ClassNotFoundException ignored) { }
+            }
+            catch (IOException | ClassNotFoundException ignored) {
+            }
             this.name = name;
         }
-    }
-    /** Функция выводит список всех текущих пользователей. */
-    public void sendClientsList() {
-        sendMessage(new Message(Message.Type.REQUEST, Message.SubType.NEW_MESSAGE,
-                SERVER_NICKNAME, "\n"));
-        sendMessage(new Message(Message.Type.REQUEST, Message.SubType.NEW_MESSAGE,
-                SERVER_NICKNAME, "Online Users"));
-        sendMessage(new Message(Message.Type.REQUEST, Message.SubType.NEW_MESSAGE,
-                SERVER_NICKNAME, "-----------------"));
-
-        for (int i = 0; i < server.getUserList().getClientsList().size(); i++){
-            sendMessage(new Message(Message.Type.REQUEST, Message.SubType.NEW_MESSAGE,
-                    SERVER_NICKNAME, server.getUserList().getClientsList().get(i).name));
-        }
-
-        sendMessage(new Message(Message.Type.REQUEST, Message.SubType.NEW_MESSAGE,
-                SERVER_NICKNAME, "-----------------\n"));
     }
 }

@@ -1,4 +1,4 @@
-package ru.nsu.ccfit.chernovskaya.observer;
+package ru.nsu.ccfit.chernovskaya.client.observer;
 
 public interface Observable {
     void notifyObservers();

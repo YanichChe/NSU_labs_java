@@ -5,4 +5,4 @@
  * @author ychernovskaya
  * @version 1.1
  */
-package ru.nsu.ccfit.chernovskaya.observer;
+package ru.nsu.ccfit.chernovskaya.client.observer;

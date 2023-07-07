@@ -1,9 +1,8 @@
 package ru.nsu.ccfit.chernovskaya.client.view;
 
 import lombok.extern.log4j.Log4j2;
-import ru.nsu.ccfit.chernovskaya.Message.Message;
+import ru.nsu.ccfit.chernovskaya.message.Message;
 import ru.nsu.ccfit.chernovskaya.client.Client;
-import ru.nsu.ccfit.chernovskaya.observer.Observer;
 
 import javax.swing.JTextPane;
 import javax.swing.text.StyledDocument;
@@ -13,7 +12,10 @@ import javax.swing.text.BadLocationException;
 import java.awt.Color;
 import java.util.ArrayList;
 
-import static ru.nsu.ccfit.chernovskaya.server.Client.SERVER_NICKNAME;
+import ru.nsu.ccfit.chernovskaya.client.observer.Observer;
+
+import static ru.nsu.ccfit.chernovskaya.server.Server.SERVER_NICKNAME;
+
 
 @Log4j2
 public class ChatPane extends JTextPane implements Observer {

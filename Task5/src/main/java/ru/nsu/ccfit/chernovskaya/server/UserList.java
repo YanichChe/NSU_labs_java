@@ -1,8 +1,9 @@
 package ru.nsu.ccfit.chernovskaya.server;
 
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.extern.log4j.Log4j2;
-import ru.nsu.ccfit.chernovskaya.Message.Message;
+import ru.nsu.ccfit.chernovskaya.message.Message;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,19 +23,19 @@ public class UserList {
      * обеспечения условия уникальности ника.
      * @param client - клиент, который добавляется на сервер
      */
-    public void addUser(final Client client) {
+    public void addUser(@NonNull final Client client) {
         String nickname = client.getName();
         log.info(nickname + " connected");
 
-        if (this.users.containsKey(nickname)) {
+        if (users.containsKey(nickname)) {
             int i = 1;
-            while (this.users.containsKey(nickname)) {
+            while (users.containsKey(nickname)) {
                 nickname = nickname + i;
                 i++;
             }
         }
 
-        this.users.put(nickname, client);
+        users.put(nickname, client);
         log.info("User list have new user " + nickname);
     }
 
@@ -42,8 +43,8 @@ public class UserList {
      * Удаление пользователя из списка активных пользователей.
      * @param client клиент
      */
-    public void deleteUser(final Client client) throws IOException {
-        this.users.remove(client.getName());
+    public void deleteUser(@NonNull final Client client) throws IOException {
+        users.remove(client.getName());
         log.info(client.getName() + " was deleted");
     }
 
@@ -55,22 +56,12 @@ public class UserList {
      */
     public ArrayList<Client> getClientsList() {
         ArrayList<Client> clientsList = new ArrayList<>(
-                this.users.entrySet().size());
+                users.entrySet().size());
 
-        for (Map.Entry<String, Client> m : this.users.entrySet()) {
+        for (Map.Entry<String, Client> m : users.entrySet()) {
             clientsList.add(m.getValue());
         }
 
         return clientsList;
-    }
-
-    /**
-     * Рассылка сообщения всем активным пользователям.
-     * @param message - сообщение пользователя/сервера
-     */
-    public void broadcast(final Message message) {
-        for (Client client : users.values()) {
-            client.sendMessage(message);
-        }
     }
 }

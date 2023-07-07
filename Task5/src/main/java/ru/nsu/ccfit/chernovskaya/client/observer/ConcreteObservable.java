@@ -1,4 +1,4 @@
-package ru.nsu.ccfit.chernovskaya.observer;
+package ru.nsu.ccfit.chernovskaya.client.observer;
 
 import java.util.ArrayList;
 import java.util.List;

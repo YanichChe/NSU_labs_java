@@ -1,7 +1,7 @@
 package ru.nsu.ccfit.chernovskaya.client.view;
 
 import lombok.extern.log4j.Log4j2;
-import ru.nsu.ccfit.chernovskaya.Message.Message;
+import ru.nsu.ccfit.chernovskaya.message.Message;
 import ru.nsu.ccfit.chernovskaya.client.Client;
 
 import javax.imageio.ImageIO;
